@@ -7,23 +7,75 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371F5014284A686300D44EFA /* DriverBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371F5013284A686300D44EFA /* DriverBrain.swift */; };
+		371F5016284A6B7000D44EFA /* ConstructorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371F5015284A6B7000D44EFA /* ConstructorBrain.swift */; };
+		3720052328499F6A0096DEEA /* ConstructorsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3720052228499F6A0096DEEA /* ConstructorsWidget.swift */; };
+		3779C364284BAFFE00AF1505 /* Formula1-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3779C362284BAFFE00AF1505 /* Formula1-Regular.ttf */; };
+		3779C368284BB44100AF1505 /* Formula1-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3779C362284BAFFE00AF1505 /* Formula1-Regular.ttf */; };
 		377A1D712849015800DDCAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1D702849015800DDCAC1 /* AppDelegate.swift */; };
 		377A1D732849015800DDCAC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1D722849015800DDCAC1 /* SceneDelegate.swift */; };
 		377A1D752849015800DDCAC1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1D742849015800DDCAC1 /* ViewController.swift */; };
 		377A1D782849015800DDCAC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 377A1D762849015800DDCAC1 /* Main.storyboard */; };
-		377A1D7A2849015900DDCAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377A1D792849015900DDCAC1 /* Assets.xcassets */; };
 		377A1D7D2849015900DDCAC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 377A1D7B2849015900DDCAC1 /* LaunchScreen.storyboard */; };
+		377A1D85284918C400DDCAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377A1D84284918C300DDCAC1 /* Assets.xcassets */; };
+		377A1D88284924E700DDCAC1 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 377A1D87284924E700DDCAC1 /* SwiftSoup */; };
+		377A1DC128494D1600DDCAC1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377A1D9228494A4A00DDCAC1 /* WidgetKit.framework */; };
+		377A1DC228494D1600DDCAC1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377A1D9428494A4A00DDCAC1 /* SwiftUI.framework */; };
+		377A1DC528494D1600DDCAC1 /* DriversWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1DC428494D1600DDCAC1 /* DriversWidget.swift */; };
+		377A1DC828494D1700DDCAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377A1DC728494D1700DDCAC1 /* Assets.xcassets */; };
+		377A1DCA28494D1700DDCAC1 /* driversWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 377A1DC628494D1600DDCAC1 /* driversWidget.intentdefinition */; };
+		377A1DCB28494D1700DDCAC1 /* driversWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 377A1DC628494D1600DDCAC1 /* driversWidget.intentdefinition */; };
+		377A1DCE28494D1700DDCAC1 /* driversWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 377A1DC028494D1600DDCAC1 /* driversWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		377A1E1C28499EC200DDCAC1 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1E1928499B1A00DDCAC1 /* WidgetBundle.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		377A1DCC28494D1700DDCAC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 377A1D652849015800DDCAC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 377A1DBF28494D1600DDCAC1;
+			remoteInfo = driversWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		377A1DA528494A4C00DDCAC1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				377A1DCE28494D1700DDCAC1 /* driversWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		371F5013284A686300D44EFA /* DriverBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverBrain.swift; sourceTree = "<group>"; };
+		371F5015284A6B7000D44EFA /* ConstructorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorBrain.swift; sourceTree = "<group>"; };
+		3720052228499F6A0096DEEA /* ConstructorsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorsWidget.swift; sourceTree = "<group>"; };
+		3779C362284BAFFE00AF1505 /* Formula1-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Formula1-Regular.ttf"; sourceTree = "<group>"; };
 		377A1D6D2849015800DDCAC1 /* Formula Onedget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formula Onedget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		377A1D702849015800DDCAC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		377A1D722849015800DDCAC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		377A1D742849015800DDCAC1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		377A1D772849015800DDCAC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		377A1D792849015900DDCAC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		377A1D7C2849015900DDCAC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		377A1D7E2849015900DDCAC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		377A1D84284918C300DDCAC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		377A1D9228494A4A00DDCAC1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		377A1D9428494A4A00DDCAC1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		377A1DC028494D1600DDCAC1 /* driversWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = driversWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		377A1DC428494D1600DDCAC1 /* DriversWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversWidget.swift; sourceTree = "<group>"; };
+		377A1DC628494D1600DDCAC1 /* driversWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = driversWidget.intentdefinition; sourceTree = "<group>"; };
+		377A1DC728494D1700DDCAC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		377A1DC928494D1700DDCAC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		377A1DD22849796D00DDCAC1 /* Formula Onedget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Formula Onedget.entitlements"; sourceTree = "<group>"; };
+		377A1DD32849798300DDCAC1 /* DriversWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriversWidgetExtension.entitlements; sourceTree = "<group>"; };
+		377A1E1928499B1A00DDCAC1 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,16 +83,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377A1D88284924E700DDCAC1 /* SwiftSoup in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		377A1DBD28494D1600DDCAC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				377A1DC228494D1600DDCAC1 /* SwiftUI.framework in Frameworks */,
+				377A1DC128494D1600DDCAC1 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3779C361284BAFEE00AF1505 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3779C362284BAFFE00AF1505 /* Formula1-Regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		377A1D642849015800DDCAC1 = {
 			isa = PBXGroup;
 			children = (
+				377A1DD32849798300DDCAC1 /* DriversWidgetExtension.entitlements */,
 				377A1D6F2849015800DDCAC1 /* Formula Onedget */,
+				377A1DC328494D1600DDCAC1 /* DriversWidget */,
+				377A1D9128494A4A00DDCAC1 /* Frameworks */,
 				377A1D6E2849015800DDCAC1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				377A1D6D2849015800DDCAC1 /* Formula Onedget.app */,
+				377A1DC028494D1600DDCAC1 /* driversWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,15 +130,65 @@
 		377A1D6F2849015800DDCAC1 /* Formula Onedget */ = {
 			isa = PBXGroup;
 			children = (
+				3779C361284BAFEE00AF1505 /* fonts */,
+				377A1DD22849796D00DDCAC1 /* Formula Onedget.entitlements */,
 				377A1D702849015800DDCAC1 /* AppDelegate.swift */,
 				377A1D722849015800DDCAC1 /* SceneDelegate.swift */,
-				377A1D742849015800DDCAC1 /* ViewController.swift */,
-				377A1D762849015800DDCAC1 /* Main.storyboard */,
-				377A1D792849015900DDCAC1 /* Assets.xcassets */,
+				377A1D89284947A200DDCAC1 /* Model */,
+				377A1D8A284947A800DDCAC1 /* View */,
+				377A1D8B284947B100DDCAC1 /* Controller */,
+				377A1D84284918C300DDCAC1 /* Assets.xcassets */,
 				377A1D7B2849015900DDCAC1 /* LaunchScreen.storyboard */,
 				377A1D7E2849015900DDCAC1 /* Info.plist */,
 			);
 			path = "Formula Onedget";
+			sourceTree = "<group>";
+		};
+		377A1D89284947A200DDCAC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				371F5013284A686300D44EFA /* DriverBrain.swift */,
+				371F5015284A6B7000D44EFA /* ConstructorBrain.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		377A1D8A284947A800DDCAC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				377A1D762849015800DDCAC1 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		377A1D8B284947B100DDCAC1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				377A1D742849015800DDCAC1 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		377A1D9128494A4A00DDCAC1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				377A1D9228494A4A00DDCAC1 /* WidgetKit.framework */,
+				377A1D9428494A4A00DDCAC1 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		377A1DC328494D1600DDCAC1 /* DriversWidget */ = {
+			isa = PBXGroup;
+			children = (
+				3720052228499F6A0096DEEA /* ConstructorsWidget.swift */,
+				377A1DC428494D1600DDCAC1 /* DriversWidget.swift */,
+				377A1E1928499B1A00DDCAC1 /* WidgetBundle.swift */,
+				377A1DC628494D1600DDCAC1 /* driversWidget.intentdefinition */,
+				377A1DC728494D1700DDCAC1 /* Assets.xcassets */,
+				377A1DC928494D1700DDCAC1 /* Info.plist */,
+			);
+			path = DriversWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,15 +201,37 @@
 				377A1D692849015800DDCAC1 /* Sources */,
 				377A1D6A2849015800DDCAC1 /* Frameworks */,
 				377A1D6B2849015800DDCAC1 /* Resources */,
+				377A1DA528494A4C00DDCAC1 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				377A1DCD28494D1700DDCAC1 /* PBXTargetDependency */,
+			);
+			name = "Formula Onedget";
+			packageProductDependencies = (
+				377A1D87284924E700DDCAC1 /* SwiftSoup */,
+			);
+			productName = "Formula Onedget";
+			productReference = 377A1D6D2849015800DDCAC1 /* Formula Onedget.app */;
+			productType = "com.apple.product-type.application";
+		};
+		377A1DBF28494D1600DDCAC1 /* driversWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 377A1DCF28494D1700DDCAC1 /* Build configuration list for PBXNativeTarget "driversWidgetExtension" */;
+			buildPhases = (
+				377A1DBC28494D1600DDCAC1 /* Sources */,
+				377A1DBD28494D1600DDCAC1 /* Frameworks */,
+				377A1DBE28494D1600DDCAC1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Formula Onedget";
-			productName = "Formula Onedget";
-			productReference = 377A1D6D2849015800DDCAC1 /* Formula Onedget.app */;
-			productType = "com.apple.product-type.application";
+			name = driversWidgetExtension;
+			productName = driversWidgetExtension;
+			productReference = 377A1DC028494D1600DDCAC1 /* driversWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -100,6 +246,9 @@
 					377A1D6C2849015800DDCAC1 = {
 						CreatedOnToolsVersion = 13.4;
 					};
+					377A1DBF28494D1600DDCAC1 = {
+						CreatedOnToolsVersion = 13.4;
+					};
 				};
 			};
 			buildConfigurationList = 377A1D682849015800DDCAC1 /* Build configuration list for PBXProject "Formula Onedget" */;
@@ -111,11 +260,15 @@
 				Base,
 			);
 			mainGroup = 377A1D642849015800DDCAC1;
+			packageReferences = (
+				377A1D86284924E700DDCAC1 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			productRefGroup = 377A1D6E2849015800DDCAC1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				377A1D6C2849015800DDCAC1 /* Formula Onedget */,
+				377A1DBF28494D1600DDCAC1 /* driversWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -126,8 +279,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				377A1D7D2849015900DDCAC1 /* LaunchScreen.storyboard in Resources */,
-				377A1D7A2849015900DDCAC1 /* Assets.xcassets in Resources */,
+				377A1D85284918C400DDCAC1 /* Assets.xcassets in Resources */,
+				3779C368284BB44100AF1505 /* Formula1-Regular.ttf in Resources */,
 				377A1D782849015800DDCAC1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		377A1DBE28494D1600DDCAC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3779C364284BAFFE00AF1505 /* Formula1-Regular.ttf in Resources */,
+				377A1DC828494D1700DDCAC1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,12 +302,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				377A1D752849015800DDCAC1 /* ViewController.swift in Sources */,
+				371F5016284A6B7000D44EFA /* ConstructorBrain.swift in Sources */,
 				377A1D712849015800DDCAC1 /* AppDelegate.swift in Sources */,
+				377A1DCB28494D1700DDCAC1 /* driversWidget.intentdefinition in Sources */,
+				371F5014284A686300D44EFA /* DriverBrain.swift in Sources */,
 				377A1D732849015800DDCAC1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		377A1DBC28494D1600DDCAC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3720052328499F6A0096DEEA /* ConstructorsWidget.swift in Sources */,
+				377A1E1C28499EC200DDCAC1 /* WidgetBundle.swift in Sources */,
+				377A1DCA28494D1700DDCAC1 /* driversWidget.intentdefinition in Sources */,
+				377A1DC528494D1600DDCAC1 /* DriversWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		377A1DCD28494D1700DDCAC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 377A1DBF28494D1600DDCAC1 /* driversWidgetExtension */;
+			targetProxy = 377A1DCC28494D1700DDCAC1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		377A1D762849015800DDCAC1 /* Main.storyboard */ = {
@@ -283,8 +468,10 @@
 		377A1D822849015900DDCAC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Formula Onedget/Formula Onedget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6BPV2KA2D8;
@@ -293,8 +480,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,15 +493,17 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		377A1D832849015900DDCAC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Formula Onedget/Formula Onedget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6BPV2KA2D8;
@@ -321,8 +512,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +525,65 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		377A1DD028494D1700DDCAC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = driversWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6BPV2KA2D8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = driversWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = driversWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eddie.Formula-Onedget.driversWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		377A1DD128494D1700DDCAC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = driversWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6BPV2KA2D8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = driversWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = driversWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eddie.Formula-Onedget.driversWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -357,7 +608,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		377A1DCF28494D1700DDCAC1 /* Build configuration list for PBXNativeTarget "driversWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				377A1DD028494D1700DDCAC1 /* Debug */,
+				377A1DD128494D1700DDCAC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		377A1D86284924E700DDCAC1 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		377A1D87284924E700DDCAC1 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 377A1D86284924E700DDCAC1 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 377A1D652849015800DDCAC1 /* Project object */;
 }
