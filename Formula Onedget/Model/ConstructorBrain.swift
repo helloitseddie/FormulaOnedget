@@ -14,7 +14,7 @@ struct ConstructorBrain {
     let userDefaults = UserDefaults(suiteName: "group.formulaOnedget")
     
     func getConstructors() {
-        if let url = URL(string: "https://ergast.com/api/f1/current/constructorStandings?limit=5") {
+        if let url = URL(string: "https://ergast.com/api/f1/current/constructorStandings.json") {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url, completionHandler: handleConstructors(data:response:error:))
             task.resume()
@@ -28,71 +28,30 @@ struct ConstructorBrain {
             return
         }
         
-        if let safeData = data {
-            let dataString = String(data: safeData, encoding: .utf8)
+        guard let testData = data else { return }
+        guard let formData = try? JSONDecoder().decode(ConstructorStandings.self, from: testData) else { return }
+        let apiData = formData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
+        
+        var appArray: [[String]] = []
+        var widgetArray: [[String]] = []
+        var constInfo: [String] = []
+        var i = 0
+        
+        for const in apiData {
+            i += 1
+            constInfo.append(const.position)
+            constInfo.append("\(const.Constructor.name)")
+            constInfo.append(const.points)
+            appArray.append(constInfo)
             
-            do {
-                let html: String = dataString!
-                let doc: Document = try SwiftSoup.parse(html)
-                let standings: Elements = try doc.select("ConstructorStanding")
-                var constructor: Element
-                var pos: Int = 1
-                
-                var c1NameData: String = ""
-                var c1PointsData: String = ""
-                var c2NameData: String = ""
-                var c2PointsData: String = ""
-                var c3NameData: String = ""
-                var c3PointsData: String = ""
-                var c4NameData: String = ""
-                var c4PointsData: String = ""
-                var c5NameData: String = ""
-                var c5PointsData: String = ""
-            
-                for standing in standings {
-                    pos = try Int(standing.attr("position"))!
-                    constructor = try standing.select("Constructor").first()!
-                    
-                    switch (pos) {
-                        case 1:
-                            c1NameData = try constructor.select("Name").first()!.text()
-                            c1PointsData = try standing.attr("points")
-                        case 2:
-                            c2NameData = try constructor.select("Name").first()!.text()
-                            c2PointsData = try standing.attr("points")
-                        case 3:
-                            c3NameData = try constructor.select("Name").first()!.text()
-                            c3PointsData = try standing.attr("points")
-                        case 4:
-                            c4NameData = try constructor.select("Name").first()!.text()
-                            c4PointsData = try standing.attr("points")
-                        case 5:
-                            c5NameData = try constructor.select("Name").first()!.text()
-                            c5PointsData = try standing.attr("points")
-                        default:
-                            print("Error")
-                    }
-                }
-                
-                DispatchQueue.main.async {
-                    self.userDefaults?.setValue(c1NameData, forKey: "c1Name")
-                    self.userDefaults?.setValue(c1PointsData, forKey: "c1Points")
-                    self.userDefaults?.setValue(c2NameData, forKey: "c2Name")
-                    self.userDefaults?.setValue(c2PointsData, forKey: "c2Points")
-                    self.userDefaults?.setValue(c3NameData, forKey: "c3Name")
-                    self.userDefaults?.setValue(c3PointsData, forKey: "c3Points")
-                    self.userDefaults?.setValue(c4NameData, forKey: "c4Name")
-                    self.userDefaults?.setValue(c4PointsData, forKey: "c4Points")
-                    self.userDefaults?.setValue(c5NameData, forKey: "c5Name")
-                    self.userDefaults?.setValue(c5PointsData, forKey: "c5Points")
-                }
-                
-            } catch Exception.Error(_, let message) {
-                print(message)
-            } catch {
-                print("error")
+            if i < 6 {
+                widgetArray.append(constInfo)
             }
             
+            constInfo = []
         }
+        
+        self.userDefaults?.setValue(widgetArray, forKey: "constructorStandings")
+        self.userDefaults?.setValue(appArray, forKey: "constructorStandingsApp")
     }
 }

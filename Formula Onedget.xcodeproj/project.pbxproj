@@ -10,15 +10,15 @@
 		371F5014284A686300D44EFA /* DriverBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371F5013284A686300D44EFA /* DriverBrain.swift */; };
 		371F5016284A6B7000D44EFA /* ConstructorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371F5015284A6B7000D44EFA /* ConstructorBrain.swift */; };
 		3720052328499F6A0096DEEA /* ConstructorsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3720052228499F6A0096DEEA /* ConstructorsWidget.swift */; };
+		37629AF628B2EDD2001920F9 /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37629AF528B2EDD2001920F9 /* DriverViewController.swift */; };
+		37629AF828B2F277001920F9 /* ConstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37629AF728B2F277001920F9 /* ConstructorViewController.swift */; };
 		3779C364284BAFFE00AF1505 /* Formula1-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3779C362284BAFFE00AF1505 /* Formula1-Regular.ttf */; };
 		3779C368284BB44100AF1505 /* Formula1-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3779C362284BAFFE00AF1505 /* Formula1-Regular.ttf */; };
 		377A1D712849015800DDCAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1D702849015800DDCAC1 /* AppDelegate.swift */; };
 		377A1D732849015800DDCAC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1D722849015800DDCAC1 /* SceneDelegate.swift */; };
-		377A1D752849015800DDCAC1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1D742849015800DDCAC1 /* ViewController.swift */; };
 		377A1D782849015800DDCAC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 377A1D762849015800DDCAC1 /* Main.storyboard */; };
 		377A1D7D2849015900DDCAC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 377A1D7B2849015900DDCAC1 /* LaunchScreen.storyboard */; };
 		377A1D85284918C400DDCAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377A1D84284918C300DDCAC1 /* Assets.xcassets */; };
-		377A1D88284924E700DDCAC1 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 377A1D87284924E700DDCAC1 /* SwiftSoup */; };
 		377A1DC128494D1600DDCAC1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377A1D9228494A4A00DDCAC1 /* WidgetKit.framework */; };
 		377A1DC228494D1600DDCAC1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377A1D9428494A4A00DDCAC1 /* SwiftUI.framework */; };
 		377A1DC528494D1600DDCAC1 /* DriversWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1DC428494D1600DDCAC1 /* DriversWidget.swift */; };
@@ -27,6 +27,8 @@
 		377A1DCB28494D1700DDCAC1 /* driversWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 377A1DC628494D1600DDCAC1 /* driversWidget.intentdefinition */; };
 		377A1DCE28494D1700DDCAC1 /* driversWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 377A1DC028494D1600DDCAC1 /* driversWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		377A1E1C28499EC200DDCAC1 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377A1E1928499B1A00DDCAC1 /* WidgetBundle.swift */; };
+		37D8157A28B2FC8D0069D8E4 /* DriverStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8157928B2FC8D0069D8E4 /* DriverStandings.swift */; };
+		37D8157C28B309660069D8E4 /* ConstructorStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8157B28B309660069D8E4 /* ConstructorStandings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,11 +59,12 @@
 		371F5013284A686300D44EFA /* DriverBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverBrain.swift; sourceTree = "<group>"; };
 		371F5015284A6B7000D44EFA /* ConstructorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorBrain.swift; sourceTree = "<group>"; };
 		3720052228499F6A0096DEEA /* ConstructorsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorsWidget.swift; sourceTree = "<group>"; };
+		37629AF528B2EDD2001920F9 /* DriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DriverViewController.swift; path = "Formula Onedget/View/DriverViewController.swift"; sourceTree = SOURCE_ROOT; };
+		37629AF728B2F277001920F9 /* ConstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorViewController.swift; sourceTree = "<group>"; };
 		3779C362284BAFFE00AF1505 /* Formula1-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Formula1-Regular.ttf"; sourceTree = "<group>"; };
 		377A1D6D2849015800DDCAC1 /* Formula Onedget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formula Onedget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		377A1D702849015800DDCAC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		377A1D722849015800DDCAC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		377A1D742849015800DDCAC1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		377A1D772849015800DDCAC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		377A1D7C2849015900DDCAC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		377A1D7E2849015900DDCAC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 		377A1DD22849796D00DDCAC1 /* Formula Onedget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Formula Onedget.entitlements"; sourceTree = "<group>"; };
 		377A1DD32849798300DDCAC1 /* DriversWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriversWidgetExtension.entitlements; sourceTree = "<group>"; };
 		377A1E1928499B1A00DDCAC1 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
+		37D8157928B2FC8D0069D8E4 /* DriverStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandings.swift; sourceTree = "<group>"; };
+		37D8157B28B309660069D8E4 /* ConstructorStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377A1D88284924E700DDCAC1 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +153,7 @@
 			children = (
 				371F5013284A686300D44EFA /* DriverBrain.swift */,
 				371F5015284A6B7000D44EFA /* ConstructorBrain.swift */,
+				37D8157828B2FC6C0069D8E4 /* DataModels */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,7 +169,8 @@
 		377A1D8B284947B100DDCAC1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				377A1D742849015800DDCAC1 /* ViewController.swift */,
+				37629AF528B2EDD2001920F9 /* DriverViewController.swift */,
+				37629AF728B2F277001920F9 /* ConstructorViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -191,6 +197,15 @@
 			path = DriversWidget;
 			sourceTree = "<group>";
 		};
+		37D8157828B2FC6C0069D8E4 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				37D8157928B2FC8D0069D8E4 /* DriverStandings.swift */,
+				37D8157B28B309660069D8E4 /* ConstructorStandings.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -210,7 +225,6 @@
 			);
 			name = "Formula Onedget";
 			packageProductDependencies = (
-				377A1D87284924E700DDCAC1 /* SwiftSoup */,
 			);
 			productName = "Formula Onedget";
 			productReference = 377A1D6D2849015800DDCAC1 /* Formula Onedget.app */;
@@ -261,7 +275,6 @@
 			);
 			mainGroup = 377A1D642849015800DDCAC1;
 			packageReferences = (
-				377A1D86284924E700DDCAC1 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 377A1D6E2849015800DDCAC1 /* Products */;
 			projectDirPath = "";
@@ -301,12 +314,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377A1D752849015800DDCAC1 /* ViewController.swift in Sources */,
+				37D8157C28B309660069D8E4 /* ConstructorStandings.swift in Sources */,
 				371F5016284A6B7000D44EFA /* ConstructorBrain.swift in Sources */,
 				377A1D712849015800DDCAC1 /* AppDelegate.swift in Sources */,
 				377A1DCB28494D1700DDCAC1 /* driversWidget.intentdefinition in Sources */,
+				37D8157A28B2FC8D0069D8E4 /* DriverStandings.swift in Sources */,
 				371F5014284A686300D44EFA /* DriverBrain.swift in Sources */,
+				37629AF628B2EDD2001920F9 /* DriverViewController.swift in Sources */,
 				377A1D732849015800DDCAC1 /* SceneDelegate.swift in Sources */,
+				37629AF828B2F277001920F9 /* ConstructorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,25 +634,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		377A1D86284924E700DDCAC1 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		377A1D87284924E700DDCAC1 /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 377A1D86284924E700DDCAC1 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 377A1D652849015800DDCAC1 /* Project object */;
 }

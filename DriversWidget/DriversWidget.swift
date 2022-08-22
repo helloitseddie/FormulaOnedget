@@ -22,21 +22,22 @@ private struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
-        let userDefaults = UserDefaults(suiteName: "group.formulaOnedget")
-        let p1Name = userDefaults!.value(forKey: "p1Name") as? String ?? "Briscoe"
-        let p1Points = userDefaults!.value(forKey: "p1Points") as? String ?? "3"
+        guard let driverStandings = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "driverStandings") as? [[String]] else { return }
         
-        let p2Name = userDefaults!.value(forKey: "p2Name") as? String ?? "Sague"
-        let p2Points = userDefaults!.value(forKey: "p2Points") as? String ?? "2"
+        let p1Name = driverStandings[0][1]
+        let p1Points = driverStandings[0][2]
         
-        let p3Name = userDefaults!.value(forKey: "p3Name") as? String ?? "Diago"
-        let p3Points = userDefaults!.value(forKey: "p3Points") as? String ?? "1"
+        let p2Name = driverStandings[1][1]
+        let p2Points = driverStandings[1][2]
         
-        let p4Name = userDefaults!.value(forKey: "p4Name") as? String ?? "Max"
-        let p4Points = userDefaults!.value(forKey: "p4Points") as? String ?? "0"
+        let p3Name = driverStandings[2][1]
+        let p3Points = driverStandings[2][2]
         
-        let p5Name = userDefaults!.value(forKey: "p5Name") as? String ?? "Kimi"
-        let p5Points = userDefaults!.value(forKey: "p5Points") as? String ?? "0"
+        let p4Name = driverStandings[3][1]
+        let p4Points = driverStandings[3][2]
+        
+        let p5Name = driverStandings[4][1]
+        let p5Points = driverStandings[4][2]
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
