@@ -145,7 +145,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constButt" destination="tUb-xg-ABc" id="gyA-K6-0Qk"/>
+                        <outlet property="driverButt" destination="LrV-Tl-r0s" id="Z9V-AZ-PSg"/>
                         <outlet property="labelView" destination="rKt-ma-K1u" id="Qng-Yg-Wxa"/>
+                        <outlet property="plsButt" destination="LCD-n6-Ueb" id="xSL-ls-JHM"/>
+                        <outlet property="scheduleButt" destination="8BG-jS-H5G" id="1uT-cQ-kNj"/>
                         <outlet property="scrollView" destination="l1j-vW-pqt" id="jUF-jE-14m"/>
                     </connections>
                 </viewController>
@@ -284,7 +288,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constButt" destination="DYO-So-TFY" id="OVY-QU-pF4"/>
+                        <outlet property="driverButt" destination="jGY-8k-q3T" id="O9S-Lm-FPj"/>
                         <outlet property="labelView" destination="o9e-eY-KLB" id="z69-jo-w8T"/>
+                        <outlet property="plsButt" destination="HSR-P6-7kv" id="oOX-3F-TVl"/>
+                        <outlet property="scheduleButt" destination="1yE-FD-yRX" id="tk0-pK-l1F"/>
                         <outlet property="scrollView" destination="GOM-RQ-wub" id="6gf-Ap-hCl"/>
                     </connections>
                 </viewController>

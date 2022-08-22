@@ -11,11 +11,21 @@ class ConstructorViewController: UIViewController {
     
     let userDefaults = UserDefaults(suiteName: "group.formulaOnedget")
     
+    @IBOutlet weak var driverButt: UIButton!
+    @IBOutlet weak var constButt: UIButton!
+    @IBOutlet weak var scheduleButt: UIButton!
+    @IBOutlet weak var plsButt: UIButton!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var labelView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        driverButt.imageView?.alpha = 0.5
+        constButt.imageView?.alpha = 1
+        scheduleButt.imageView?.alpha = 0.5
+        plsButt.imageView?.alpha = 0.5
         
         let constructorBrain = ConstructorBrain()
         constructorBrain.getConstructors()
@@ -66,6 +76,6 @@ extension ConstructorViewController {
     @IBAction func navigateToDriver(_ sender: UIButton) {
         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DriverView") as UIViewController
         viewController.modalPresentationStyle = .fullScreen
-        self.present(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: false, completion: nil)
     }
 }
