@@ -78,4 +78,9 @@ extension ConstructorViewController {
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: false, completion: nil)
     }
+    @IBAction func navigateToSchedule(_ sender: UIButton) {
+        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScheduleView") as UIViewController
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: false, completion: nil)
+    }
 }

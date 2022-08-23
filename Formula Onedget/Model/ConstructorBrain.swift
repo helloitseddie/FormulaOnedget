@@ -7,7 +7,6 @@
 
 import UIKit
 import WidgetKit
-import SwiftSoup
 
 struct ConstructorBrain {
     
