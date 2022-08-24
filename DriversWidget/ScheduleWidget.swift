@@ -11,39 +11,40 @@ import Intents
 
 private struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), p1Name: "Verstappen", p1Points: "3", p2Name: "Sague", p2Points: "2", p3Name: "Diago", p3Points: "1", p4Name: "Max", p4Points: "0", p5Name: "Kimi", p5Points: "0", configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(), round: "1", weekend: "Mar 18 - Mar 20", raceName: "Bahrain Grand Prix", sess1: "FP1", sess1Time: "Fri 8:00 AM EDT", sess2: "FP2", sess2Time: "Fri 11:00 AM EDT", sess3: "FP3", sess3Time: "Sat 8:00 AM EDT", sess4: "Q1", sess4Time: "Sat 11:00 AM EDT", sess5: "Race", sess5Time: "Sun 11:00 AM EDT", track: "bahraingp", flag: "bahrain", configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), p1Name: "Verstappen", p1Points: "3", p2Name: "Sague", p2Points: "2", p3Name: "Diago", p3Points: "1", p4Name: "Max", p4Points: "0", p5Name: "Kimi", p5Points: "0", configuration: configuration)
+        let entry = SimpleEntry(date: Date(), round: "1", weekend: "Mar 18 - Mar 20", raceName: "Bahrain Grand Prix", sess1: "FP1", sess1Time: "Fri 8:00 AM EDT", sess2: "FP2", sess2Time: "Fri 11:00 AM EDT", sess3: "FP3", sess3Time: "Sat 8:00 AM EDT", sess4: "Q1", sess4Time: "Sat 11:00 AM EDT", sess5: "Race", sess5Time: "Sun 11:00 AM EDT", track: "bahraingp", flag: "bahrain",  configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
-        guard let driverStandings = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "driverStandings") as? [[String]] else { return }
+        guard let race = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "schedule") as? [[String]] else { return }
         
-        let p1Name = driverStandings[0][1]
-        let p1Points = driverStandings[0][2]
-        
-        let p2Name = driverStandings[1][1]
-        let p2Points = driverStandings[1][2]
-        
-        let p3Name = driverStandings[2][1]
-        let p3Points = driverStandings[2][2]
-        
-        let p4Name = driverStandings[3][1]
-        let p4Points = driverStandings[3][2]
-        
-        let p5Name = driverStandings[4][1]
-        let p5Points = driverStandings[4][2]
+        let round = race[0][0]
+        let weekend = race[1][0]
+        let raceName = race[2][0]
+        let sess1 = race[3][0]
+        let sess1Time = race[3][1]
+        let sess2 = race[4][0]
+        let sess2Time = race[4][1]
+        let sess3 = race[5][0]
+        let sess3Time = race[5][1]
+        let sess4 = race[6][0]
+        let sess4Time = race[6][1]
+        let sess5 = race[7][0]
+        let sess5Time = race[7][1]
+        let track = race[8][0]
+        let flag = race[8][1]
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, p1Name: p1Name, p1Points: p1Points, p2Name: p2Name, p2Points: p2Points, p3Name: p3Name, p3Points: p3Points, p4Name: p4Name, p4Points: p4Points, p5Name: p5Name, p5Points: p5Points, configuration: configuration)
+            let entry = SimpleEntry(date: entryDate, round: round, weekend: weekend, raceName: raceName, sess1: sess1, sess1Time: sess1Time, sess2: sess2, sess2Time: sess2Time, sess3: sess3, sess3Time: sess3Time, sess4: sess4, sess4Time: sess4Time, sess5: sess5, sess5Time: sess5Time, track: track, flag: flag, configuration: configuration)
             entries.append(entry)
         }
 
@@ -55,16 +56,22 @@ private struct Provider: IntentTimelineProvider {
 private struct SimpleEntry: TimelineEntry {
     var date: Date
     
-    let p1Name: String
-    let p1Points: String
-    let p2Name: String
-    let p2Points: String
-    let p3Name: String
-    let p3Points: String
-    let p4Name: String
-    let p4Points: String
-    let p5Name: String
-    let p5Points: String
+    let round: String
+    let weekend: String
+    let raceName: String
+    let sess1: String
+    let sess1Time: String
+    let sess2: String
+    let sess2Time: String
+    let sess3: String
+    let sess3Time: String
+    let sess4: String
+    let sess4Time: String
+    let sess5: String
+    let sess5Time: String
+    let track: String
+    let flag: String
+    
     let configuration: ConfigurationIntent
 }
 
@@ -73,52 +80,62 @@ private struct ScheduleWidgetEntryView : View {
 
     var body: some View {
         ZStack {
-            Image("Image").resizable()
+            Image("mediumImage").resizable()
             
             Rectangle()
                 .fill(.white)
                 .clipShape(ContainerRelativeShape()
                 .inset(by: 5))
             
-            VStack {
-                Text("Drivers' Championship").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
+            VStack(spacing: 0) {
+                HStack(spacing: 15) {
+                    // left title
+                    Text("Round \(entry.round)").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
+                    
+                    Image(entry.flag).resizable()
+                        .frame(width: 30.0, height: 30).shadow(color: .gray, radius: 5, x: 0, y: 5)
                 
-                Rectangle().fill(Color("darkTeal")).frame(width: 125, height: 2)
-                
-                HStack {
-                    Text("#").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .topLeading).padding(.leading, 10).padding(.trailing, 0)
-                    Text("Name").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(maxWidth: .infinity, alignment: .center)
-                    Text("PTS").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame( alignment: .bottomTrailing).padding(.trailing, 10).padding(.leading, 0)
+                    // right title
+                    Text(entry.weekend).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
                 }
                 
-                HStack {
-                    Text("1.").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .topLeading).padding(.leading, 10).padding(.trailing, 0)
-                    Text(entry.p1Name).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(maxWidth: .infinity, alignment: .center)
-                    Text(entry.p1Points).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame( alignment: .bottomTrailing).padding(.trailing, 10).padding(.leading, 0)
-                }
+                Rectangle().fill(Color("darkTeal")).frame(width: 300, height: 2).padding(.bottom, 5)
                 
-                HStack {
-                    Text("2.").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .topLeading).padding(.leading, 10)
-                    Text(entry.p2Name).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(maxWidth: .infinity, alignment: .center)
-                    Text(entry.p2Points).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .bottomTrailing).padding(.trailing, 10)
-                }
-                
-                HStack {
-                    Text("3.").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .topLeading).padding(.leading, 10)
-                    Text(entry.p3Name).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(maxWidth: .infinity, alignment: .center)
-                    Text(entry.p3Points).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .bottomTrailing).padding(.trailing, 10)
-                }
-                
-                HStack {
-                    Text("4.").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .topLeading).padding(.leading, 10)
-                    Text(entry.p4Name).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(maxWidth: .infinity, alignment: .center)
-                    Text(entry.p4Points).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .bottomTrailing).padding(.trailing, 10)
-                }
-                
-                HStack {
-                    Text("5.").foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .topLeading).padding(.leading, 10)
-                    Text(entry.p5Name).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(maxWidth: .infinity, alignment: .center)
-                    Text(entry.p5Points).foregroundColor(.black).font(Font.custom("formula1", size: 10)).frame(alignment: .bottomTrailing).padding(.trailing, 10)
+                HStack { // left and right
+                    VStack(spacing: 0) { // left side
+                        
+                        Text(entry.raceName).foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                        
+                        Image(entry.track).resizable()
+                            .frame(width: 75.0, height: 75.0).shadow(color: .gray, radius: 5, x: 0, y: 5)
+                    }
+                    
+                    VStack(spacing: 7) { // right side
+                        HStack(spacing: 15) {
+                            Text("\(entry.sess1): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                            Text(entry.sess1Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                        }
+                        
+                        HStack(spacing: 15) {
+                            Text("\(entry.sess2): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                            Text(entry.sess2Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                        }
+                        
+                        HStack(spacing: 15) {
+                            Text("\(entry.sess3): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                            Text(entry.sess3Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                        }
+                        
+                        HStack(spacing: 15) {
+                            Text("\(entry.sess4): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                            Text(entry.sess4Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                        }
+                        
+                        HStack(spacing: 15) {
+                            Text("\(entry.sess5): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                            Text(entry.sess5Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                        }
+                    }
                 }
             }
         }
@@ -132,15 +149,15 @@ struct ScheduleWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             ScheduleWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Drivers' Championship")
-        .description("Shows you the current standings of the Drivers' Championship")
-        .supportedFamilies([.systemSmall])
+        .configurationDisplayName("Schedule")
+        .description("Shows you the next race in the F1 schedule")
+        .supportedFamilies([.systemMedium])
     }
 }
 
 struct ScheduleWidget_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleWidgetEntryView(entry: SimpleEntry(date: Date(), p1Name: "Verstappen", p1Points: "3", p2Name: "Sague", p2Points: "2", p3Name: "Diago", p3Points: "1", p4Name: "Max", p4Points: "0", p5Name: "Kimi", p5Points: "0", configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        ScheduleWidgetEntryView(entry: SimpleEntry(date: Date(), round: "1", weekend: "Mar 18 - Mar 20", raceName: "Bahrain Grand Prix", sess1: "FP1", sess1Time: "Fri 8:00 AM EDT", sess2: "FP2", sess2Time: "Fri 11:00 AM EDT", sess3: "FP3", sess3Time: "Sat 8:00 AM EDT", sess4: "Q1", sess4Time: "Sat 11:00 AM EDT", sess5: "Race", sess5Time: "Sun 11:00 AM EDT", track: "bahraingp", flag: "bahrain",  configuration: ConfigurationIntent()))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
