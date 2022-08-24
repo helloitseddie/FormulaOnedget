@@ -110,10 +110,11 @@ private struct ScheduleWidgetEntryView : View {
                             .frame(width: 75.0, height: 75.0).shadow(color: .gray, radius: 5, x: 0, y: 5)
                     }
                     
-                    VStack(spacing: 7) { // right side
+                    VStack(alignment: .trailing, spacing: 7) { // right side
                         HStack(spacing: 15) {
-                            Text("\(entry.sess1): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                            Text(entry.sess1Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                            Text("\(entry.sess1): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12)).frame(alignment: .leading)
+                            
+                            Text(entry.sess1Time).foregroundColor(.orange).font(Font.custom("formula1", size: 12))
                         }
                         
                         HStack(spacing: 15) {

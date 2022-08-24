@@ -124,14 +124,16 @@ class ScheduleViewController: UIViewController {
         
         for time in race[2...5] { // non-race times
             tempVal.append(getSession(time[0]))
-            tempVal.append(getTime("\(time[1])T\(time[2])"))
+            tempVal.append("\(getDay("\(time[1])")) \(getTime("\(time[1])T\(time[2])"))")
             formRace.append(tempVal)
             tempVal = []
         }
         
         tempVal.append("Race") // race times
-        tempVal.append(getTime("\(race[6][0])T\(race[7][0])"))
+        tempVal.append("\(getDay("\(race[6][0])")) \(getTime("\(race[6][0])T\(race[7][0])"))")
         formRace.append(tempVal)
+        
+        print("Eddie - \(formRace)")
         
         formRace.append(widgetImages(race[1][0])) // images
         
