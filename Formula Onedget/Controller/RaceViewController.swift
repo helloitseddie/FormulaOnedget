@@ -155,7 +155,7 @@ class RaceViewController: UIViewController {
         let day = getDay(trackInfo[6][0])
         let start = getTime("\(trackInfo[6][0])T\(trackInfo[7][0])")
         
-        seshLabel.text = "Race:"     //\(day) \(start)"
+        seshLabel.text = "Race:"
         seshLabel.textColor = .black
         seshLabel.font = UIFont(name: "Formula1-Display-Regular", size: 20)
         seshLabel.textAlignment = .left

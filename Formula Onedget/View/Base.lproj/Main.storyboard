@@ -83,13 +83,10 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="slotBG" translatesAutoresizingMaskIntoConstraints="NO" id="dEh-7Z-S4s" userLabel="TitleBG">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drivers' Championship" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSC-TV-yyH">
-                                        <rect key="frame" x="29" y="62" width="357" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drivers Standings" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSC-TV-yyH">
+                                        <rect key="frame" x="29" y="62" width="357" height="40"/>
                                         <color key="tintColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="CSC-TV-yyH" secondAttribute="height" multiplier="51:4" id="FbE-ms-1db"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Formula1-Display-Regular" family="Formula1" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Formula1-Display-Regular" family="Formula1" pointSize="40"/>
                                         <color key="textColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
@@ -111,7 +108,7 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l1j-vW-pqt">
                                         <rect key="frame" x="0.0" y="8" width="414" height="629"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rKt-ma-K1u">
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rKt-ma-K1u">
                                                 <rect key="frame" x="0.0" y="8" width="414" height="802"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </stackView>
@@ -229,12 +226,9 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="slotBG" translatesAutoresizingMaskIntoConstraints="NO" id="4Bj-B4-L9b" userLabel="TitleBG">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Constructors' Championship" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Lc-rp-xMN">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Constructors Standings" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Lc-rp-xMN">
                                         <rect key="frame" x="29" y="62" width="357" height="28"/>
                                         <color key="tintColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="6Lc-rp-xMN" secondAttribute="height" multiplier="51:4" id="6Wy-dO-tJg"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Formula1-Display-Regular" family="Formula1" pointSize="28"/>
                                         <color key="textColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

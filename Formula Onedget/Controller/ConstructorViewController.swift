@@ -36,7 +36,7 @@ class ConstructorViewController: UIViewController {
     fileprivate func setConstructors() {
         guard let constructorStandings = self.userDefaults?.value(forKey: "constructorStandingsApp") as? [[String]] else { return }
         
-        let containerHeight: Float = (50.0 * Float(constructorStandings.count)) + (10.0 * Float(constructorStandings.count))
+        let containerHeight: Float = (100.0 * Float(constructorStandings.count)) + (10.0 * Float(constructorStandings.count))
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: CGFloat(containerHeight))
         
         labelView.frame.size = CGSize(width: scrollView.contentSize.width, height: scrollView.contentSize.height)
@@ -49,10 +49,17 @@ class ConstructorViewController: UIViewController {
         var labelBG: UIImageView
         var label: UILabel
         
+        var isFirst = true
         for constructor in constructorStandings {
+            
             labelBG = UIImageView()
-            labelBG.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(50))
+            labelBG.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(100))
             labelBG.image = #imageLiteral(resourceName: "slotBG")
+            
+            if isFirst {
+                labelBG.image = #imageLiteral(resourceName: "slotBG").withAlignmentRectInsets(UIEdgeInsets(top: -8, left: 0, bottom: 0, right: 0))
+                isFirst = false
+            }
             
             label = UILabel()
             label.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: CGFloat(50))

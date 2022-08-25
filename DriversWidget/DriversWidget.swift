@@ -22,22 +22,40 @@ private struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
-        guard let driverStandings = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "driverStandings") as? [[String]] else { return }
+        struct DriverInfo {
+            let data: [String]
+            
+            var lastName: String {
+                return data[2]
+            }
+            
+            var points: String {
+                return data[3]
+            }
+        }
         
-        let p1Name = driverStandings[0][1]
-        let p1Points = driverStandings[0][2]
+        guard let defaults = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "driverStandings") as? [[String]] else { return }
         
-        let p2Name = driverStandings[1][1]
-        let p2Points = driverStandings[1][2]
+        var driverStandings: [DriverInfo] = []
         
-        let p3Name = driverStandings[2][1]
-        let p3Points = driverStandings[2][2]
+        for driver in defaults[0...5] {
+            driverStandings.append(DriverInfo(data: driver))
+        }
         
-        let p4Name = driverStandings[3][1]
-        let p4Points = driverStandings[3][2]
+        let p1Name = driverStandings[0].lastName
+        let p1Points = driverStandings[0].points
         
-        let p5Name = driverStandings[4][1]
-        let p5Points = driverStandings[4][2]
+        let p2Name = driverStandings[1].lastName
+        let p2Points = driverStandings[1].points
+        
+        let p3Name = driverStandings[2].lastName
+        let p3Points = driverStandings[2].points
+        
+        let p4Name = driverStandings[3].lastName
+        let p4Points = driverStandings[3].points
+        
+        let p5Name = driverStandings[4].lastName
+        let p5Points = driverStandings[4].points
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()

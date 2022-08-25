@@ -34,9 +34,9 @@ class DriverViewController: UIViewController {
     }
     
     fileprivate func setDrivers() {
-        guard let driverStandings = self.userDefaults?.value(forKey: "driverStandingsApp") as? [[String]] else { return }
+        guard let driverStandings = self.userDefaults?.value(forKey: "driverStandings") as? [[String]] else { return }
         
-        let containerHeight: Float = (50.0 * Float(driverStandings.count)) + (10.0 * Float(driverStandings.count))
+        let containerHeight: Float = (100.0 * Float(driverStandings.count)) + (5.0 * Float(driverStandings.count))
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: CGFloat(containerHeight))
         
         labelView.frame.size = CGSize(width: scrollView.contentSize.width, height: scrollView.contentSize.height)
@@ -46,24 +46,85 @@ class DriverViewController: UIViewController {
         labelView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         labelView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
+        var labelContainer: UIView
         var labelBG: UIImageView
-        var label: UILabel
+        var labelStack: UIStackView
+        var posLabel: UILabel
+        var driverStack: UIStackView
+        var driverLabel: UILabel
+        var teamLabel: UILabel
+        var pointsLabel: UILabel
         
-        for driver in driverStandings {
+        for rawDriver in driverStandings {
+            
+            let driver = DriverInfo(data: rawDriver)
+            
+            labelContainer = UIView()
+            labelContainer.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(100))
+            
             labelBG = UIImageView()
-            labelBG.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(50))
+            labelBG.frame.size = CGSize(width: scrollView.contentSize.width - 20, height: labelContainer.frame.height)
+            labelBG.center = labelContainer.center
             labelBG.image = #imageLiteral(resourceName: "slotBG")
             
-            label = UILabel()
-            label.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: CGFloat(50))
-            label.text = "\(driver[0]). \(driver[1]) \(driver[2])PTS"
-            label.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-            label.textAlignment = .center
-            label.sizeToFit()
+            labelStack = UIStackView()
+            labelStack.frame.size = CGSize(width: labelContainer.frame.width - 40, height: CGFloat(50))
+            labelStack.axis = .horizontal
+            labelStack.distribution = .fillProportionally
+            labelStack.center = labelContainer.center
             
-            label.center = labelBG.center
-            labelBG.addSubview(label)
-            labelView.addArrangedSubview(labelBG)
+            posLabel = UILabel()
+            posLabel.frame.size = CGSize(width: CGFloat(50), height: labelStack.frame.height)
+            posLabel.widthAnchor.constraint(equalToConstant: CGFloat(labelContainer.frame.width / 10)).isActive = true
+            
+            posLabel.text = "\(driver.position)"
+            posLabel.font = UIFont(name: "Formula1-Display-Regular", size: 20)
+            posLabel.textColor = .black
+            posLabel.textAlignment = .left
+            labelStack.addArrangedSubview(posLabel)
+            
+            let teamColor = UIProgressView()
+            teamColor.frame.size = CGSize(width: CGFloat(10), height: CGFloat(50))
+            teamColor.widthAnchor.constraint(equalToConstant: CGFloat(labelContainer.frame.width / 50)).isActive = true
+            teamColor.progressTintColor = driver.constructorColor
+            teamColor.progress = 1
+            labelStack.addArrangedSubview(teamColor)
+            
+            driverStack = UIStackView()
+            driverStack.axis = .vertical
+            driverStack.frame.size = labelStack.frame.size
+            driverStack.distribution = .fillProportionally
+            
+            driverLabel = UILabel()
+            driverLabel.text = "    \(driver.fullName)"
+            driverLabel.font = UIFont(name: "Formula1-Display-Regular", size: 18)
+            driverLabel.textColor = .black
+            driverLabel.textAlignment = .left
+            
+            teamLabel = UILabel()
+            teamLabel.text = "      \(driver.constructor)"
+            teamLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+            teamLabel.textColor = .black
+            teamLabel.textAlignment = .left
+
+            driverStack.addArrangedSubview(driverLabel)
+            driverStack.addArrangedSubview(teamLabel)
+            
+            labelStack.addArrangedSubview(driverStack)
+
+            pointsLabel = UILabel()
+            pointsLabel.text = "\(driver.points)PTS"
+            pointsLabel.font = UIFont(name: "Formula1-Display-Regular", size: 18)
+            pointsLabel.textColor = .black
+            pointsLabel.textAlignment = .right
+            pointsLabel.widthAnchor.constraint(equalToConstant: CGFloat(labelContainer.frame.width / 4)).isActive = true
+
+            labelStack.addArrangedSubview(pointsLabel)
+            
+            labelContainer.addSubview(labelBG)
+            labelContainer.addSubview(labelStack)
+            
+            labelView.addArrangedSubview(labelContainer)
         }
         
         scrollView.addSubview(labelView)

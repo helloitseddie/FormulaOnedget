@@ -31,28 +31,23 @@ struct DriverBrain {
         guard let formData = try? JSONDecoder().decode(DriverStandings.self, from: testData) else { return }
         let apiData = formData.MRData.StandingsTable.StandingsLists[0].DriverStandings
         
-        var appArray: [[String]] = []
-        var widgetArray: [[String]] = []
+        var driverArray: [[String]] = []
         var driverInfo: [String] = []
-        var i = 0
         
         for driver in apiData {
-            i += 1
             driverInfo.append(driver.position)
             driverInfo.append("\(driver.Driver.givenName) \(driver.Driver.familyName)")
+            driverInfo.append(driver.Driver.familyName)
             driverInfo.append(driver.points)
-            appArray.append(driverInfo)
+            driverInfo.append(driver.Constructors[0].name)
             
-            if i < 6 {
-                driverInfo[1] = driver.Driver.familyName
-                widgetArray.append(driverInfo)
-            }
+            driverArray.append(driverInfo)
             
             driverInfo = []
+
         }
         
-        self.userDefaults?.setValue(widgetArray, forKey: "driverStandings")
-        self.userDefaults?.setValue(appArray, forKey: "driverStandingsApp")
+        self.userDefaults?.setValue(driverArray, forKey: "driverStandings")
 
     }
 }
