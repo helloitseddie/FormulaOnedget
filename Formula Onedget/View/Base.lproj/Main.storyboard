@@ -246,12 +246,12 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qjg-mq-xeQ" userLabel="StandingsView">
-                                <rect key="frame" x="0.0" y="129" width="414" height="645"/>
+                                <rect key="frame" x="0.0" y="137" width="414" height="637"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOM-RQ-wub">
                                         <rect key="frame" x="0.0" y="8" width="414" height="629"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="o9e-eY-KLB">
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o9e-eY-KLB">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="629"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </stackView>
@@ -276,7 +276,7 @@
                             <constraint firstAttribute="bottom" secondItem="LsP-GR-Hqe" secondAttribute="bottom" id="7c9-Xi-ykO"/>
                             <constraint firstItem="hgr-59-kHq" firstAttribute="top" secondItem="a0M-IA-cPU" secondAttribute="top" id="Au5-c9-j7U"/>
                             <constraint firstItem="ly9-yf-tpY" firstAttribute="trailing" secondItem="y3P-vd-dEo" secondAttribute="trailing" id="EBw-ac-YOn"/>
-                            <constraint firstItem="qjg-mq-xeQ" firstAttribute="top" secondItem="hgr-59-kHq" secondAttribute="bottom" id="FU6-OS-9Io"/>
+                            <constraint firstItem="qjg-mq-xeQ" firstAttribute="top" secondItem="hgr-59-kHq" secondAttribute="bottom" constant="8" id="FU6-OS-9Io"/>
                             <constraint firstItem="ly9-yf-tpY" firstAttribute="centerX" secondItem="a0M-IA-cPU" secondAttribute="centerX" id="Gn1-TT-2MZ"/>
                             <constraint firstItem="LsP-GR-Hqe" firstAttribute="trailing" secondItem="y3P-vd-dEo" secondAttribute="trailing" id="J1m-iP-1f3"/>
                             <constraint firstItem="LsP-GR-Hqe" firstAttribute="leading" secondItem="a0M-IA-cPU" secondAttribute="leading" id="OPw-OP-ssM"/>

@@ -34,9 +34,9 @@ class ConstructorViewController: UIViewController {
     }
     
     fileprivate func setConstructors() {
-        guard let constructorStandings = self.userDefaults?.value(forKey: "constructorStandingsApp") as? [[String]] else { return }
+        guard let constructorStandings = self.userDefaults?.value(forKey: "constructorStandingsWithDrivers") as? [[String]] else { return }
         
-        let containerHeight: Float = (100.0 * Float(constructorStandings.count)) + (10.0 * Float(constructorStandings.count))
+        let containerHeight: Float = (100.0 * Float(constructorStandings.count)) + (5.0 * Float(constructorStandings.count))
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: CGFloat(containerHeight))
         
         labelView.frame.size = CGSize(width: scrollView.contentSize.width, height: scrollView.contentSize.height)
@@ -46,31 +46,105 @@ class ConstructorViewController: UIViewController {
         labelView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         labelView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
+        var labelContainer: UIView
         var labelBG: UIImageView
-        var label: UILabel
+        var labelStack: UIStackView
+        var posLabel: UILabel
+        var constStack: UIStackView
+        var constLabel: UILabel
+        var flagView: UIImageView
+        var pointsLabel: UILabel
         
-        var isFirst = true
-        for constructor in constructorStandings {
+        for constructorRaw in constructorStandings {
+            
+            let constructor = ConstructorInfo(data: constructorRaw)
+            
+            labelContainer = UIView()
+            labelContainer.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(100))
             
             labelBG = UIImageView()
-            labelBG.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(100))
+            labelBG.frame.size = CGSize(width: scrollView.contentSize.width - 20, height: labelContainer.frame.height)
+            labelBG.center = labelContainer.center
             labelBG.image = #imageLiteral(resourceName: "slotBG")
             
-            if isFirst {
-                labelBG.image = #imageLiteral(resourceName: "slotBG").withAlignmentRectInsets(UIEdgeInsets(top: -8, left: 0, bottom: 0, right: 0))
-                isFirst = false
-            }
+            labelStack = UIStackView()
+            labelStack.frame.size = CGSize(width: labelContainer.frame.width - 40, height: CGFloat(50))
+            labelStack.axis = .horizontal
+            labelStack.distribution = .fillProportionally
+            labelStack.center = labelContainer.center
             
-            label = UILabel()
-            label.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: CGFloat(50))
-            label.text = "\(constructor[0]). \(constructor[1]) \(constructor[2])PTS"
-            label.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-            label.textAlignment = .center
-            label.sizeToFit()
+            posLabel = UILabel()
+            posLabel.frame.size = CGSize(width: CGFloat(50), height: labelStack.frame.height)
+            posLabel.widthAnchor.constraint(equalToConstant: CGFloat(labelContainer.frame.width / 10)).isActive = true
+            posLabel.text = "\(constructor.position)"
+            posLabel.font = UIFont(name: "Formula1-Display-Regular", size: 20)
+            posLabel.textColor = .black
+            posLabel.textAlignment = .left
+            labelStack.addArrangedSubview(posLabel)
             
-            label.center = labelBG.center
-            labelBG.addSubview(label)
-            labelView.addArrangedSubview(labelBG)
+            let teamColor = UIProgressView()
+            teamColor.frame.size = CGSize(width: CGFloat(10), height: CGFloat(50))
+            teamColor.widthAnchor.constraint(equalToConstant: CGFloat(labelContainer.frame.width / 50)).isActive = true
+            teamColor.progressTintColor = constructor.constructorColor
+            teamColor.progress = 1
+            labelStack.addArrangedSubview(teamColor)
+            
+            constStack = UIStackView()
+            constStack.axis = .vertical
+            constStack.frame.size = labelStack.frame.size
+            constStack.distribution = .fillEqually
+            
+            constLabel = UILabel()
+            constLabel.text = "    \(constructor.name)"
+            constLabel.font = UIFont(name: "Formula1-Display-Regular", size: 18)
+            constLabel.textColor = .black
+            constLabel.textAlignment = .left
+            
+            let flagStack = UIStackView()
+            flagStack.frame.size = CGSize(width: constLabel.frame.width, height: CGFloat(25))
+            flagStack.axis = .horizontal
+            flagStack.distribution = .fill
+            
+            let leftPadLabel = UILabel()
+            leftPadLabel.frame.size = CGSize(width: 20, height: CGFloat(25))
+            leftPadLabel.widthAnchor.constraint(equalToConstant: CGFloat(20)).isActive = true
+            leftPadLabel.text = "     "
+            leftPadLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+            leftPadLabel.adjustsFontSizeToFitWidth = true
+            flagStack.addArrangedSubview(leftPadLabel)
+            
+            flagView = UIImageView()
+            flagView.frame.size = CGSize(width: CGFloat(23), height: CGFloat(12))
+            flagView.widthAnchor.constraint(equalToConstant: CGFloat(23)).isActive = true
+            flagView.image = UIImage(named: constructor.constructorFlag)
+            flagView.contentMode = .scaleAspectFit
+            flagStack.addArrangedSubview(flagView)
+            
+            let rightPadLabel = UILabel()
+            rightPadLabel.frame.size = CGSize(width: flagStack.frame.width - 43, height: CGFloat(25))
+            rightPadLabel.text = "    \(constructor.drivers.joined(separator: " / "))"
+            rightPadLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+            rightPadLabel.adjustsFontSizeToFitWidth = true
+            flagStack.addArrangedSubview(rightPadLabel)
+
+            constStack.addArrangedSubview(constLabel)
+            constStack.addArrangedSubview(flagStack)
+            
+            labelStack.addArrangedSubview(constStack)
+
+            pointsLabel = UILabel()
+            pointsLabel.text = "\(constructor.points)PTS"
+            pointsLabel.font = UIFont(name: "Formula1-Display-Regular", size: 18)
+            pointsLabel.textColor = .black
+            pointsLabel.textAlignment = .right
+            pointsLabel.widthAnchor.constraint(equalToConstant: CGFloat(labelContainer.frame.width / 4)).isActive = true
+
+            labelStack.addArrangedSubview(pointsLabel)
+            
+            labelContainer.addSubview(labelBG)
+            labelContainer.addSubview(labelStack)
+            
+            labelView.addArrangedSubview(labelContainer)
         }
         
         scrollView.addSubview(labelView)

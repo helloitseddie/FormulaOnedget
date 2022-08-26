@@ -22,22 +22,40 @@ private struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
-        guard let constStandings = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "constructorStandings") as? [[String]] else { return }
+        struct ConstructorInfo {
+            let data: [String]
+            
+            var name: String {
+                return data[1]
+            }
+            
+            var points: String {
+                return data[2]
+            }
+        }
         
-        let c1Name = constStandings[0][1]
-        let c1Points = constStandings[0][2]
+        guard let defaults = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "constructorStandings") as? [[String]] else { return }
         
-        let c2Name = constStandings[1][1]
-        let c2Points = constStandings[1][2]
+        var constStandings: [ConstructorInfo] = []
         
-        let c3Name = constStandings[2][1]
-        let c3Points = constStandings[2][2]
+        for const in defaults[0...5] {
+            constStandings.append(ConstructorInfo(data: const))
+        }
         
-        let c4Name = constStandings[3][1]
-        let c4Points = constStandings[3][2]
+        let c1Name = constStandings[0].name
+        let c1Points = constStandings[0].points
         
-        let c5Name = constStandings[4][1]
-        let c5Points = constStandings[4][2]
+        let c2Name = constStandings[1].name
+        let c2Points = constStandings[1].points
+        
+        let c3Name = constStandings[2].name
+        let c3Points = constStandings[2].points
+        
+        let c4Name = constStandings[3].name
+        let c4Points = constStandings[3].points
+        
+        let c5Name = constStandings[4].name
+        let c5Points = constStandings[4].points
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()

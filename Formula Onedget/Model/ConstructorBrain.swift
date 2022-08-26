@@ -19,6 +19,13 @@ struct ConstructorBrain {
             task.resume()
             task.suspend()
         }
+        
+        if let url = URL(string: "https://ergast.com/api/f1/current/driverStandings.json") {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url, completionHandler: handleDrivers(data:response:error:))
+            task.resume()
+            task.suspend()
+        }
     }
     
     func handleConstructors(data: Data?, response: URLResponse?, error: Error?) {
@@ -31,26 +38,52 @@ struct ConstructorBrain {
         guard let formData = try? JSONDecoder().decode(ConstructorStandings.self, from: testData) else { return }
         let apiData = formData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
         
-        var appArray: [[String]] = []
-        var widgetArray: [[String]] = []
+        var constArray: [[String]] = []
         var constInfo: [String] = []
-        var i = 0
         
         for const in apiData {
-            i += 1
             constInfo.append(const.position)
             constInfo.append("\(const.Constructor.name)")
             constInfo.append(const.points)
-            appArray.append(constInfo)
-            
-            if i < 6 {
-                widgetArray.append(constInfo)
-            }
+            constInfo.append("\(const.Constructor.nationality)")
+            constArray.append(constInfo)
             
             constInfo = []
         }
         
-        self.userDefaults?.setValue(widgetArray, forKey: "constructorStandings")
-        self.userDefaults?.setValue(appArray, forKey: "constructorStandingsApp")
+        self.userDefaults?.setValue(constArray, forKey: "constructorStandings")
+    }
+    
+    func handleDrivers(data: Data?, response: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+            return
+        }
+        
+        guard let testData = data else { return }
+        guard let formData = try? JSONDecoder().decode(DriverStandings.self, from: testData) else { return }
+        let apiData = formData.MRData.StandingsTable.StandingsLists[0].DriverStandings
+        
+        guard let constArray = self.userDefaults?.value(forKey: "constructorStandings") as? [[String]] else { return }
+        
+        var newConstArray: [[String]] = []
+        var temp: [String] = []
+        for constructorRaw in constArray {
+            let constructor = ConstructorInfo(data: constructorRaw)
+            
+            temp = constructorRaw
+            
+            for driver in apiData {
+                if driver.Constructors[0].name == constructor.name {
+                    temp.append(driver.Driver.familyName)
+                }
+            }
+            
+            newConstArray.append(temp)
+            temp = []
+        }
+        
+        self.userDefaults?.setValue(newConstArray, forKey: "constructorStandingsWithDrivers")
+
     }
 }
