@@ -68,5 +68,24 @@ struct ScheduleInfo: Codable {
     let quali: Session
     let race: Session
     
+}
+
+struct IndividualRace: Codable {
+    let round: String
     
+    let raceName: String
+    let circuit: String
+    let flag: String
+    
+    let weekend: String
+    let s1: IndividualRaceSession
+    let s2: IndividualRaceSession
+    let s3: IndividualRaceSession
+    let s4: IndividualRaceSession
+    let race: IndividualRaceSession
+}
+
+struct IndividualRaceSession: Codable {
+    let name: String
+    let time: String
 }

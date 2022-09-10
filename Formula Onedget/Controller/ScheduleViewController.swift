@@ -19,6 +19,18 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var labelView: UIStackView!
     
+    let weekImage = UIImageView()
+    let dayImage = UIImageView()
+    let hourImage = UIImageView()
+    let minImage = UIImageView()
+    let secImage = UIImageView()
+    
+    let weekTimer = UILabel()
+    let dayTimer = UILabel()
+    let hourTimer = UILabel()
+    let minTimer = UILabel()
+    let secTimer = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +64,6 @@ class ScheduleViewController: UIViewController {
         
         var labelContainer: UIView
         var labelBG: UIImageView
-        var raceInfo: UIStackView
         
         var raceName: UILabel
         
@@ -60,11 +71,6 @@ class ScheduleViewController: UIViewController {
         var offset: Float = 0
         
         var raceButt: UIButton
-        
-        var leftSection: UIStackView
-        var middleSection: UIStackView
-        var rightSection: UIStackView
-        
         var timerView: UIView
         
         for raceRaw in schedule {
@@ -89,16 +95,18 @@ class ScheduleViewController: UIViewController {
                 raceName.textColor = #colorLiteral(red: 0.7961815596, green: 0.3117287159, blue: 0.08521645516, alpha: 1)
                 offset = (Float(scrollView.contentSize.height) / Float(schedule.count) * Float(race.round))
                 offset -= (Float(scrollView.frame.height / 2) + 50)
-//                self.userDefaults?.setValue(formatRace(race), forKey: "schedule")
+                self.userDefaults?.setValue(formatRace(race), forKey: "schedule")
                 
                 labelContainer.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(200))
                 labelContainer.heightAnchor.constraint(equalToConstant: CGFloat(200)).isActive = true
-                labelBG.frame.size = CGSize(width: scrollView.contentSize.width - 20, height: CGFloat(200))
                 
-                timerView.backgroundColor = #colorLiteral(red: 0.7961815596, green: 0.3117287159, blue: 0.08521645516, alpha: 1)
-                timerView.frame.size = CGSize(width: labelBG.frame.width, height: CGFloat(100))
+                labelBG.frame.size = CGSize(width: scrollView.contentSize.width - 20, height: CGFloat(200))
+                labelBG.layer.borderColor = #colorLiteral(red: 0.7945286036, green: 0.3097311854, blue: 0.08659250289, alpha: 1)
+                labelBG.layer.borderWidth = 4
+                
+                setTimer(papaView: timerView, background: labelBG, race: race)
                 timerView.center.x = labelContainer.center.x
-                timerView.center.y = labelContainer.center.y + 50
+                timerView.center.y = labelBG.center.y + 50
                 
                 raceButt.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(200))
                 raceButt.center = labelContainer.center
@@ -116,100 +124,63 @@ class ScheduleViewController: UIViewController {
             
             labelContainer.addSubview(labelBG)
             
-            raceInfo = UIStackView()
-            raceInfo.axis = .horizontal
-            raceInfo.frame.size = CGSize(width: labelBG.frame.width, height: CGFloat(100))
-            raceInfo.center.x = labelBG.center.x
-
-            leftSection = UIStackView()
-            leftSection.axis = .vertical
-            leftSection.distribution = .fillEqually
-            leftSection.spacing = 5
-            leftSection.frame.size = CGSize(width: raceInfo.frame.width / 5, height: raceInfo.frame.height)
-
-            middleSection = UIStackView()
-            middleSection.frame.size = CGSize(width: raceInfo.frame.width * 0.6, height: labelBG.frame.height - 10)
-            middleSection.axis = .vertical
-            middleSection.spacing = -8
-            middleSection.distribution = .fillEqually
-
-            rightSection = UIStackView()
-            rightSection.frame.size = CGSize(width: raceInfo.frame.width / 5, height: raceInfo.frame.height)
-
             // Left
             let round = UILabel()
-            round.text = "  Round\n  \(race.round)"
-            round.numberOfLines = 0
-            round.frame.size = CGSize(width: leftSection.frame.width, height: raceInfo.frame.height / 4)
-            round.widthAnchor.constraint(equalToConstant: leftSection.frame.width).isActive = true
+            round.frame.size = CGSize(width: labelBG.frame.width * 0.2, height: 50)
+            round.text = "\nRound\n\(race.round)\n"
             round.font = UIFont(name: "Formula1-Display-Regular", size: 14)
-            round.textColor = .black
+            round.numberOfLines = 0
             round.textAlignment = .center
-            round.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-            round.layer.borderWidth = 5
+            round.layer.borderColor = #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1)
+            round.layer.borderWidth = 2
             round.layer.cornerRadius = 8
-            leftSection.addArrangedSubview(round)
-
-            // Mid
-            let raceLocale = UILabel()
-            raceLocale.numberOfLines = 0
-            raceLocale.text = "\(race.city), \(race.country)"
-            raceLocale.frame.size = CGSize(width: middleSection.frame.width, height: 12.5)
-            raceLocale.font = UIFont(name: "Formula1-Display-Regular", size: 14)
-            raceLocale.textAlignment = .left
-            raceLocale.sizeToFit()
-
-            raceName.text = "\(race.raceName)"
-            raceName.frame.size = CGSize(width: middleSection.frame.width, height: 18.5)
-            raceName.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-            raceName.adjustsFontSizeToFitWidth = true
-            raceName.textAlignment = .left
-            raceName.sizeToFit()
-
-            let raceCircuit = UILabel()
-            raceCircuit.numberOfLines = 0
-            raceCircuit.text = race.circuitName
-            raceCircuit.frame.size = CGSize(width: middleSection.frame.width, height: 12.5)
-            raceCircuit.font = UIFont(name: "Formula1-Display-Regular", size: 14)
-            raceCircuit.textAlignment = .left
-            raceCircuit.sizeToFit()
-
-            raceLocale.textColor = raceName.textColor
-            raceCircuit.textColor = raceName.textColor
+            labelBG.addSubview(round)
+            round.translatesAutoresizingMaskIntoConstraints = false
+            round.topAnchor.constraint(equalTo: labelBG.topAnchor, constant: 15).isActive = true
+            round.leftAnchor.constraint(equalTo: labelBG.leftAnchor, constant: 10).isActive = true
+            round.widthAnchor.constraint(equalToConstant: labelBG.frame.width * 0.2).isActive = true
             
-            middleSection.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-            middleSection.layer.borderWidth = 5
-            middleSection.layer.cornerRadius = 8
-
-            middleSection.addArrangedSubview(raceLocale)
-            middleSection.addArrangedSubview(raceName)
-            middleSection.addArrangedSubview(raceCircuit)
-
             // Right
             let weekend = UILabel()
             let weekendText = getDates(startDay: "\(race.fp1.date)T\(race.fp1.time)", endDay: "\(race.race.date)T\(race.race.time)")
             let weekendArr = weekendText.components(separatedBy: " - ")
-            weekend.text = "\(weekendArr[0])\n-\n\(weekendArr[1])"
+            weekend.text = "\n\(weekendArr[0])\n-\n\(weekendArr[1])\n"
             weekend.numberOfLines = 0
-            weekend.frame.size = CGSize(width: rightSection.frame.width, height: raceInfo.frame.height)
-            weekend.widthAnchor.constraint(equalToConstant: rightSection.frame.width).isActive = true
-            weekend.frame.size = CGSize(width: rightSection.frame.width, height: raceInfo.frame.height)
+            weekend.frame.size = CGSize(width: labelBG.frame.width * 0.2, height: 50)
             weekend.font = UIFont(name: "Formula1-Display-Regular", size: 14)
             weekend.textAlignment = .center
-            weekend.sizeToFit()
-            weekend.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-            weekend.layer.borderWidth = 5
+            weekend.layer.borderColor = #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1)
+            weekend.layer.borderWidth = 2
             weekend.layer.cornerRadius = 8
-            rightSection.addArrangedSubview(weekend)
+            labelBG.addSubview(weekend)
+            weekend.translatesAutoresizingMaskIntoConstraints = false
+            weekend.topAnchor.constraint(equalTo: labelBG.topAnchor, constant: 15).isActive = true
+            weekend.rightAnchor.constraint(equalTo: labelBG.rightAnchor, constant: -10).isActive = true
+            weekend.widthAnchor.constraint(equalTo: round.widthAnchor).isActive = true
+            weekend.heightAnchor.constraint(equalTo: round.heightAnchor).isActive = true
+            
+            // Middle
+            let raceLocale = UILabel()
+            raceLocale.numberOfLines = 0
+            raceLocale.text = "\(race.country)"
+            raceLocale.frame.size = CGSize(width: labelBG.frame.width * 0.6, height: 12.5)
+            raceLocale.font = UIFont(name: "Formula1-Display-Regular", size: 14)
+            labelBG.addSubview(raceLocale)
+            raceLocale.translatesAutoresizingMaskIntoConstraints = false
+            raceLocale.topAnchor.constraint(equalTo: labelBG.topAnchor, constant: 18).isActive = true
+            raceLocale.leftAnchor.constraint(equalTo: round.rightAnchor, constant: 15).isActive = true
+            raceLocale.rightAnchor.constraint(equalTo: weekend.leftAnchor, constant: -15).isActive = true
+            raceLocale.textColor = raceName.textColor
 
-            raceInfo.addArrangedSubview(leftSection)
-            raceInfo.addArrangedSubview(middleSection)
-            raceInfo.addArrangedSubview(rightSection)
-            raceInfo.center.x = labelContainer.center.x
-            rightSection.trailingAnchor.constraint(equalTo: raceInfo.trailingAnchor, constant: 20).isActive = true
-
-            labelContainer.addSubview(raceInfo)
-            raceInfo.topAnchor.constraint(equalTo: labelContainer.topAnchor).isActive = true
+            raceName.text = "\(race.raceName)"
+            raceName.frame.size = CGSize(width: labelBG.frame.width * 0.6, height: 18.5)
+            raceName.font = UIFont(name: "Formula1-Display-Regular", size: 20)
+            raceName.numberOfLines = 0
+            labelBG.addSubview(raceName)
+            raceName.translatesAutoresizingMaskIntoConstraints = false
+            raceName.topAnchor.constraint(equalTo: raceLocale.bottomAnchor, constant: 10).isActive = true
+            raceName.leftAnchor.constraint(equalTo: round.rightAnchor, constant: 15).isActive = true
+            raceName.rightAnchor.constraint(equalTo: weekend.leftAnchor, constant: -15).isActive = true
             
             labelContainer.addSubview(timerView)
             labelContainer.addSubview(raceButt)
@@ -227,47 +198,65 @@ class ScheduleViewController: UIViewController {
         }
     }
     
+    @objc func buttonClicked(sender: UIButton) {
+        guard let schedule = self.userDefaults?.value(forKey: "scheduleApp") as? [Data] else { return }
+        let chosenRace = schedule[sender.tag]
+        guard let raceInfo = try? JSONDecoder().decode(ScheduleInfo.self, from: chosenRace) else { return }
+        guard let raceRaw = formatRace(raceInfo) else { return }
+        guard let race = try? JSONDecoder().decode(IndividualRace.self, from: raceRaw) else { return }
+        
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "RaceView") as? RaceViewController else { return }
+        let nc = UINavigationController(rootViewController: viewController)
+        viewController.trackInfo = race
+        self.present(nc, animated: true, completion: nil)
+    }
+    
     fileprivate func checkDate(_ date: String) -> Bool {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let dateObj = dateFormatter.date(from:date)!
+        
+        let raceEnd = dateObj.addingTimeInterval(3 * 60 * 60)
         let todaysDate = Date()
         
-        return todaysDate < dateObj
+        return todaysDate < raceEnd
     }
     
-    @objc func buttonClicked(sender: UIButton) {
-        guard let schedule = self.userDefaults?.value(forKey: "scheduleApp") as? [[[String]]] else { return }
+    fileprivate func formatRace(_ race: ScheduleInfo) -> Data? {
         
-        let viewController = storyboard?.instantiateViewController(withIdentifier: "RaceView") as! RaceViewController
-        let nc = UINavigationController(rootViewController: viewController)
-        viewController.trackInfo = schedule[sender.tag]
-        self.present(nc, animated: true, completion: nil)
-    }
-    
-    fileprivate func formatRace(_ race: [[String]]) -> [[String]] {
-        var formRace: [[String]] = []
-        var tempVal: [String] = []
+        let encoder = JSONEncoder()
         
-        formRace.append(race[0]) // round
-        formRace.append([getDates(startDay: "\(race[2][1])T\(race[2][2])", endDay: "\(race[6][0])T\(race[7][0])")]) // week dates
-        formRace.append(race[1]) // race
+        let images: [String]
+        let weekend: String
+        let s1: IndividualRaceSession
+        let s2: IndividualRaceSession
+        let s3: IndividualRaceSession
+        let s4: IndividualRaceSession
+        let main: IndividualRaceSession
         
-        for time in race[2...5] { // non-race times
-            tempVal.append(getSession(time[0]))
-            tempVal.append("\(getDay("\(time[1])")) \(getTime("\(time[1])T\(time[2])"))")
-            formRace.append(tempVal)
-            tempVal = []
+        images = widgetImages(race.raceName)
+        weekend = getDates(startDay: "\(race.fp1.date)T\(race.fp1.time)", endDay: "\(race.race.date)T\(race.race.time)")
+        
+        s1 = IndividualRaceSession(name: "FP1", time: "\(getDay("\(race.fp1.date)")) \(getTime("\(race.fp1.date)T\(race.fp1.time)"))")
+        
+        if let thirdSess = race.fp3 {
+            s2 = IndividualRaceSession(name: "FP2", time: "\(getDay("\(race.fp2.date)")) \(getTime("\(race.fp2.date)T\(race.fp2.time)"))")
+            s3 = IndividualRaceSession(name: "FP3", time: "\(getDay("\(thirdSess.date)")) \(getTime("\(thirdSess.date)T\(thirdSess.time)"))")
+            s4 = IndividualRaceSession(name: "Q1", time: "\(getDay("\(race.quali.date)")) \(getTime("\(race.quali.date)T\(race.quali.time)"))")
+        } else {
+            s2 = IndividualRaceSession(name: "Q1", time: "\(getDay("\(race.quali.date)")) \(getTime("\(race.quali.date)T\(race.quali.time)"))")
+            s3 = IndividualRaceSession(name: "FP3", time: "\(getDay("\(race.fp2.date)")) \(getTime("\(race.fp2.date)T\(race.fp2.time)"))")
+            s4 = IndividualRaceSession(name: "Sprint", time: "\(getDay("\(race.sprint!.date)")) \(getTime("\(race.sprint!.date)T\(race.sprint!.time)"))")
         }
         
-        tempVal.append("Race") // race times
-        tempVal.append("\(getDay("\(race[6][0])")) \(getTime("\(race[6][0])T\(race[7][0])"))")
-        formRace.append(tempVal)
+        main = IndividualRaceSession(name: "Race", time: "\(getDay("\(race.race.date)")) \(getTime("\(race.race.date)T\(race.race.time)"))")
         
-        formRace.append(widgetImages(race[1][0])) // images
+        let widgetRace = IndividualRace(round: race.roundRaw, raceName: race.raceName, circuit: images[0], flag: images[1], weekend: weekend, s1: s1, s2: s2, s3: s3, s4: s4, race: main)
         
-        return formRace
+        guard let encoded = try? encoder.encode(widgetRace) else { return nil }
+        
+        return encoded
     }
     
     fileprivate func getDates(startDay: String, endDay: String) -> String {
@@ -289,21 +278,6 @@ class ScheduleViewController: UIViewController {
         let end = Calendar.current.dateComponents([.day], from: endDayObj).day!
         
         return "\(startMonth) \(start) - \(endMonth) \(end)"
-    }
-    
-    fileprivate func getSession(_ session: String) -> String {
-        switch(session) {
-        case "FirstPractice":
-            return "FP1"
-        case "SecondPractice":
-            return "FP2"
-        case "ThirdPractice":
-            return "FP3"
-        case "Qualifying":
-            return "Q1"
-        default:
-            return "Sprint"
-        }
     }
     
     fileprivate func getDay(_ date: String) -> String {
@@ -385,6 +359,251 @@ class ScheduleViewController: UIViewController {
         }
     }
     
+    func setTimer(papaView: UIView, background: UIImageView, race: ScheduleInfo) {
+        
+        papaView.frame.size = CGSize(width: background.frame.width, height: CGFloat(100))
+        papaView.backgroundColor = #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 0.3999521684)
+        
+        let timerStack = UIStackView()
+        timerStack.frame.size = papaView.frame.size
+        timerStack.center = papaView.center
+        timerStack.distribution = .fillEqually
+        
+        // Week
+        let weekView = UIView()
+        weekView.frame.size = CGSize(width: papaView.frame.width / 5, height: papaView.frame.height)
+        
+        weekImage.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        weekImage.image = #imageLiteral(resourceName: "light")
+        weekView.addSubview(weekImage)
+        
+        weekTimer.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        weekTimer.text = "00"
+        weekTimer.textAlignment = .center
+        weekTimer.font = UIFont(name: "Formula1-Display-Regular", size: 32)
+        weekView.addSubview(weekTimer)
+        
+        let weekLabel = UILabel()
+        weekLabel.text = "Weeks"
+        weekLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+        weekView.addSubview(weekLabel)
+        
+        weekImage.translatesAutoresizingMaskIntoConstraints = false
+        weekLabel.translatesAutoresizingMaskIntoConstraints = false
+        weekImage.centerXAnchor.constraint(equalTo: weekView.centerXAnchor).isActive = true
+        weekTimer.centerXAnchor.constraint(equalTo: weekView.centerXAnchor).isActive = true
+        weekLabel.centerXAnchor.constraint(equalTo: weekView.centerXAnchor).isActive = true
+        weekImage.topAnchor.constraint(equalTo: weekView.topAnchor, constant: 5).isActive = true
+        weekTimer.topAnchor.constraint(equalTo: weekView.topAnchor, constant: 5).isActive = true
+        weekLabel.topAnchor.constraint(equalTo: weekImage.bottomAnchor).isActive = true
+        
+        weekView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        timerStack.addArrangedSubview(weekView)
+        
+        
+        // Day
+        let dayView = UIView()
+        dayView.frame.size = CGSize(width: papaView.frame.width / 5, height: papaView.frame.height)
+        
+        dayImage.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        dayImage.image = #imageLiteral(resourceName: "light")
+        dayView.addSubview(dayImage)
+        
+        dayTimer.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        dayTimer.text = "00"
+        dayTimer.textAlignment = .center
+        dayTimer.font = UIFont(name: "Formula1-Display-Regular", size: 32)
+        dayView.addSubview(dayTimer)
+        
+        let dayLabel = UILabel()
+        dayLabel.text = "Days"
+        dayLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+        dayView.addSubview(dayLabel)
+        
+        dayImage.translatesAutoresizingMaskIntoConstraints = false
+        dayLabel.translatesAutoresizingMaskIntoConstraints = false
+        dayImage.centerXAnchor.constraint(equalTo: dayView.centerXAnchor).isActive = true
+        dayTimer.centerXAnchor.constraint(equalTo: dayView.centerXAnchor).isActive = true
+        dayLabel.centerXAnchor.constraint(equalTo: dayView.centerXAnchor).isActive = true
+        dayImage.topAnchor.constraint(equalTo: dayView.topAnchor, constant: 5).isActive = true
+        dayTimer.topAnchor.constraint(equalTo: dayView.topAnchor, constant: 5).isActive = true
+        dayLabel.topAnchor.constraint(equalTo: dayImage.bottomAnchor).isActive = true
+        
+        dayView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        timerStack.addArrangedSubview(dayView)
+        
+        // Hour
+        let hourView = UIView()
+        hourView.frame.size = CGSize(width: papaView.frame.width / 5, height: papaView.frame.height)
+        
+        hourImage.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        hourImage.image = #imageLiteral(resourceName: "light")
+        hourView.addSubview(hourImage)
+        
+        hourTimer.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        hourTimer.text = "00"
+        hourTimer.textAlignment = .center
+        hourTimer.font = UIFont(name: "Formula1-Display-Regular", size: 32)
+        hourView.addSubview(hourTimer)
+        
+        let hourLabel = UILabel()
+        hourLabel.text = "Hours"
+        hourLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+        hourView.addSubview(hourLabel)
+        
+        hourImage.translatesAutoresizingMaskIntoConstraints = false
+        hourLabel.translatesAutoresizingMaskIntoConstraints = false
+        hourImage.centerXAnchor.constraint(equalTo: hourView.centerXAnchor).isActive = true
+        hourTimer.centerXAnchor.constraint(equalTo: hourView.centerXAnchor).isActive = true
+        hourLabel.centerXAnchor.constraint(equalTo: hourView.centerXAnchor).isActive = true
+        hourImage.topAnchor.constraint(equalTo: hourView.topAnchor, constant: 5).isActive = true
+        hourTimer.topAnchor.constraint(equalTo: hourView.topAnchor, constant: 5).isActive = true
+        hourLabel.topAnchor.constraint(equalTo: hourImage.bottomAnchor).isActive = true
+        
+        hourView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        timerStack.addArrangedSubview(hourView)
+        
+        // minute
+        let minView = UIView()
+        minView.frame.size = CGSize(width: papaView.frame.width / 5, height: papaView.frame.height)
+        
+        minImage.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        minImage.image = #imageLiteral(resourceName: "light")
+        minView.addSubview(minImage)
+        
+        minTimer.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        minTimer.text = "00"
+        minTimer.textAlignment = .center
+        minTimer.font = UIFont(name: "Formula1-Display-Regular", size: 32)
+        minView.addSubview(minTimer)
+        
+        let minLabel = UILabel()
+        minLabel.text = "Minutes"
+        minLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+        minView.addSubview(minLabel)
+        
+        minImage.translatesAutoresizingMaskIntoConstraints = false
+        minLabel.translatesAutoresizingMaskIntoConstraints = false
+        minImage.centerXAnchor.constraint(equalTo: minView.centerXAnchor).isActive = true
+        minTimer.centerXAnchor.constraint(equalTo: minView.centerXAnchor).isActive = true
+        minLabel.centerXAnchor.constraint(equalTo: minView.centerXAnchor).isActive = true
+        minImage.topAnchor.constraint(equalTo: minView.topAnchor, constant: 5).isActive = true
+        minTimer.topAnchor.constraint(equalTo: minView.topAnchor, constant: 5).isActive = true
+        minLabel.topAnchor.constraint(equalTo: minImage.bottomAnchor).isActive = true
+        
+        minView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        timerStack.addArrangedSubview(minView)
+        
+        // second
+        let secView = UIView()
+        secView.frame.size = CGSize(width: papaView.frame.width / 5, height: papaView.frame.height)
+        
+        secImage.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        secImage.image = #imageLiteral(resourceName: "light")
+        secView.addSubview(secImage)
+        
+        secTimer.frame.size = CGSize(width: background.frame.width / 5, height: 75)
+        secTimer.text = "00"
+        secTimer.textAlignment = .center
+        secTimer.font = UIFont(name: "Formula1-Display-Regular", size: 32)
+        secView.addSubview(secTimer)
+        
+        let secLabel = UILabel()
+        secLabel.text = "Seconds"
+        secLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+        secView.addSubview(secLabel)
+        
+        secImage.translatesAutoresizingMaskIntoConstraints = false
+        secLabel.translatesAutoresizingMaskIntoConstraints = false
+        secImage.centerXAnchor.constraint(equalTo: secView.centerXAnchor).isActive = true
+        secTimer.centerXAnchor.constraint(equalTo: secView.centerXAnchor).isActive = true
+        secLabel.centerXAnchor.constraint(equalTo: secView.centerXAnchor).isActive = true
+        secImage.topAnchor.constraint(equalTo: secView.topAnchor, constant: 5).isActive = true
+        secTimer.topAnchor.constraint(equalTo: secView.topAnchor, constant: 5).isActive = true
+        secLabel.topAnchor.constraint(equalTo: secImage.bottomAnchor).isActive = true
+        
+        timerStack.addArrangedSubview(secView)
+        
+        papaView.addSubview(timerStack)
+        
+        weekImage.isHidden = true
+        dayImage.isHidden = true
+        hourImage.isHidden = true
+        minImage.isHidden = true
+        secImage.isHidden = true
+        
+        weekTimer.isHidden = false
+        dayTimer.isHidden = false
+        hourTimer.isHidden = false
+        minTimer.isHidden = false
+        secTimer.isHidden = false
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            let nowDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            guard let raceTime = dateFormatter.date(from: "\(race.race.date)T\(race.race.time)") else { return }
+            
+            let secondsRaw = Int(raceTime.timeIntervalSince(nowDate))
+            let seconds = secondsRaw % 60
+            
+            let minutesRaw = secondsRaw / 60
+            let minutes = minutesRaw % 60
+            
+            let hoursRaw = minutesRaw / 60
+            let hours = hoursRaw % 24
+            
+            let daysRaw = hoursRaw / 24
+            let days = daysRaw % 7
+            
+            let weeks =  daysRaw / 7
+            
+            DispatchQueue.main.async {
+                self.secTimer.text = String(format: "%02d", seconds)
+                self.minTimer.text = String(format: "%02d", minutes)
+                self.hourTimer.text = String(format: "%02d", hours)
+                self.dayTimer.text = String(format: "%02d", days)
+                self.weekTimer.text = String(format: "%02d", weeks)
+                
+                self.weekTimer.isHidden = weeks <= 0 ? true : false
+                self.weekImage.isHidden = weeks > 0 ? true : false
+                
+                if days <= 0 && daysRaw <= 0 {
+                    self.dayTimer.isHidden = true
+                    self.dayImage.isHidden = false
+                } else {
+                    self.dayTimer.isHidden = false
+                    self.dayImage.isHidden = true
+                }
+                
+                if hours <= 0 && hoursRaw <= 0 {
+                    self.hourTimer.isHidden = true
+                    self.hourImage.isHidden = false
+                } else {
+                    self.hourTimer.isHidden = false
+                    self.hourImage.isHidden = true
+                }
+                
+                if minutes <= 0 && minutesRaw <= 0 {
+                    self.minTimer.isHidden = true
+                    self.minImage.isHidden = false
+                } else {
+                    self.minTimer.isHidden = false
+                    self.minImage.isHidden = true
+                }
+                
+                if seconds <= 0 && secondsRaw <= 0 {
+                    self.secTimer.isHidden = true
+                    self.secImage.isHidden = false
+                } else {
+                    self.secTimer.isHidden = false
+                    self.secImage.isHidden = true
+                }
+            }
+        }
+        
+    }
 }
 
 // MARK - Navigation
@@ -399,5 +618,22 @@ extension ScheduleViewController {
         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DriverView") as UIViewController
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: false, completion: nil)
+    }
+}
+
+extension UIView {
+    
+    enum ViewSide {
+        case Left, Right, Top, Bottom
+    }
+    
+    func addBorder(withColor color: CGColor, andThickness thickness: CGFloat) {
+        
+        let border = CALayer()
+        border.backgroundColor = color
+        
+        border.frame = CGRect(x: frame.maxX, y: (frame.minY + 20), width: thickness, height: frame.height / 2)
+        
+        layer.addSublayer(border)
     }
 }

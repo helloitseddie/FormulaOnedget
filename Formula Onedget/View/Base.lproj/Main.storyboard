@@ -490,50 +490,13 @@
                                 <rect key="frame" x="0.0" y="137" width="414" height="759"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slotBG" translatesAutoresizingMaskIntoConstraints="NO" id="Q9X-6r-1Qu">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="2000"/>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="HC6-mi-6xu" userLabel="flagdate">
-                                        <rect key="frame" x="8" y="8" width="398" height="105"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vT7-w6-Md8">
-                                                <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="105" id="HE1-b7-d7Z"/>
-                                                    <constraint firstAttribute="height" constant="105" id="eB6-Nf-m8G"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri - Sun Aug 10 - 30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgC-En-yRT">
-                                                <rect key="frame" x="130" y="0.0" width="268" height="105"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="miamigp" translatesAutoresizingMaskIntoConstraints="NO" id="mtq-ab-b3G">
-                                        <rect key="frame" x="94.5" y="121" width="225" height="225"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="235" id="f1B-Jv-Vfs"/>
-                                            <constraint firstAttribute="height" constant="225" id="w3B-Vm-NzI"/>
-                                            <constraint firstAttribute="width" secondItem="mtq-ab-b3G" secondAttribute="height" multiplier="1:1" id="y2w-4F-mGG"/>
-                                        </constraints>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Uo7-zZ-UBE">
-                                        <rect key="frame" x="22" y="416" width="371" height="308"/>
-                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="HC6-mi-6xu" firstAttribute="leading" secondItem="gVv-cF-2Ft" secondAttribute="leading" constant="8" id="0gr-hh-NTG"/>
-                                    <constraint firstItem="gVv-cF-2Ft" firstAttribute="trailing" secondItem="Uo7-zZ-UBE" secondAttribute="trailing" constant="21" id="616-49-dLr"/>
-                                    <constraint firstItem="HC6-mi-6xu" firstAttribute="top" secondItem="gVv-cF-2Ft" secondAttribute="top" constant="8" id="BPS-Zl-BYs"/>
-                                    <constraint firstItem="gVv-cF-2Ft" firstAttribute="trailing" secondItem="HC6-mi-6xu" secondAttribute="trailing" constant="8" id="H8g-BA-orB"/>
                                     <constraint firstItem="Q9X-6r-1Qu" firstAttribute="leading" secondItem="gVv-cF-2Ft" secondAttribute="leading" id="MWK-U8-285"/>
                                     <constraint firstItem="Q9X-6r-1Qu" firstAttribute="top" secondItem="gVv-cF-2Ft" secondAttribute="top" id="RX7-gJ-bgA"/>
                                     <constraint firstItem="Q9X-6r-1Qu" firstAttribute="trailing" secondItem="gVv-cF-2Ft" secondAttribute="trailing" id="WF9-iP-waS"/>
-                                    <constraint firstItem="Uo7-zZ-UBE" firstAttribute="leading" secondItem="gVv-cF-2Ft" secondAttribute="leading" constant="22" id="YQY-5j-n1w"/>
-                                    <constraint firstItem="mtq-ab-b3G" firstAttribute="centerX" secondItem="1z8-Ec-Sjl" secondAttribute="centerX" id="jnl-sP-chl"/>
-                                    <constraint firstItem="mtq-ab-b3G" firstAttribute="top" secondItem="HC6-mi-6xu" secondAttribute="bottom" constant="8" symbolic="YES" id="rPV-o3-5jP"/>
-                                    <constraint firstItem="Uo7-zZ-UBE" firstAttribute="top" secondItem="mtq-ab-b3G" secondAttribute="bottom" constant="8" symbolic="YES" id="x1H-aE-4d4"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="pOf-fy-vP8"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gVv-cF-2Ft"/>
@@ -545,23 +508,19 @@
                             <constraint firstItem="dyw-55-By2" firstAttribute="leading" secondItem="HI4-AV-7m4" secondAttribute="leading" id="NMk-So-GXj"/>
                             <constraint firstItem="0PO-00-I2Q" firstAttribute="leading" secondItem="05z-h0-Rd2" secondAttribute="leading" id="PUX-z1-vTD"/>
                             <constraint firstAttribute="bottom" secondItem="1z8-Ec-Sjl" secondAttribute="bottom" id="Qiw-XX-8iK"/>
-                            <constraint firstItem="1z8-Ec-Sjl" firstAttribute="trailing" secondItem="05z-h0-Rd2" secondAttribute="trailing" id="Rf2-z3-Tna"/>
+                            <constraint firstItem="1z8-Ec-Sjl" firstAttribute="trailing" secondItem="05z-h0-Rd2" secondAttribute="trailing" constant="-8" id="Rf2-z3-Tna"/>
                             <constraint firstItem="dyw-55-By2" firstAttribute="top" secondItem="HI4-AV-7m4" secondAttribute="top" id="ZVa-u5-bN8"/>
                             <constraint firstAttribute="bottom" secondItem="dyw-55-By2" secondAttribute="bottom" id="aNO-Wm-rb8"/>
                             <constraint firstAttribute="trailing" secondItem="0PO-00-I2Q" secondAttribute="trailing" id="aVd-dK-6WU"/>
                             <constraint firstItem="dyw-55-By2" firstAttribute="trailing" secondItem="05z-h0-Rd2" secondAttribute="trailing" id="dAl-X2-PCA"/>
                             <constraint firstItem="1z8-Ec-Sjl" firstAttribute="top" secondItem="0PO-00-I2Q" secondAttribute="bottom" constant="8" symbolic="YES" id="fP5-8q-Tp9"/>
-                            <constraint firstItem="1z8-Ec-Sjl" firstAttribute="leading" secondItem="05z-h0-Rd2" secondAttribute="leading" id="lFn-uF-lmj"/>
+                            <constraint firstItem="1z8-Ec-Sjl" firstAttribute="leading" secondItem="05z-h0-Rd2" secondAttribute="leading" constant="8" id="lFn-uF-lmj"/>
                             <constraint firstItem="0PO-00-I2Q" firstAttribute="top" secondItem="HI4-AV-7m4" secondAttribute="top" id="qhJ-tB-hcZ"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="flagImage" destination="vT7-w6-Md8" id="7qw-ua-dYc"/>
                         <outlet property="raceLabel" destination="Bba-no-ID1" id="WFI-JJ-R76"/>
                         <outlet property="scrollView" destination="1z8-Ec-Sjl" id="Tn0-iR-z8P"/>
-                        <outlet property="timeView" destination="Uo7-zZ-UBE" id="7uU-nt-o26"/>
-                        <outlet property="trackImage" destination="mtq-ab-b3G" id="Gge-7c-iIw"/>
-                        <outlet property="weekendLabel" destination="YgC-En-yRT" id="5tZ-Kk-JTK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svf-1a-VLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -574,7 +533,6 @@
         <image name="constructor" width="50" height="50"/>
         <image name="donate" width="50" height="50"/>
         <image name="driver" width="50" height="50"/>
-        <image name="miamigp" width="250" height="250"/>
         <image name="schedule" width="50" height="50"/>
         <image name="slotBG" width="3000" height="2000"/>
         <systemColor name="systemBackgroundColor">

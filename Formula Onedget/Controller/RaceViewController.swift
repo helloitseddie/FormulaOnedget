@@ -10,167 +10,48 @@ import UIKit
 class RaceViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var raceLabel: UILabel!
-    @IBOutlet weak var weekendLabel: UILabel!
     
-    @IBOutlet weak var trackImage: UIImageView!
-    @IBOutlet weak var flagImage: UIImageView!
- 
-    @IBOutlet weak var timeView: UIStackView!
-    
-    var trackInfo: [[String]] = []
+    var trackInfo: IndividualRace? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let imageHeight = flagImage.frame.height
-        let imageWidth = flagImage.frame.width
-        
-        switch trackInfo[1][0] {
-        case "Bahrain Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "bahraingp")
-            flagImage.image = #imageLiteral(resourceName: "bahrain")
-        case "Saudi Arabian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "saudigp")
-            flagImage.image = #imageLiteral(resourceName: "saudi")
-        case "Australian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "australiangp")
-            flagImage.image = #imageLiteral(resourceName: "australia")
-        case "Emilia Romagna Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "ergp")
-            flagImage.image = #imageLiteral(resourceName: "italy")
-        case "Miami Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "miamigp")
-            flagImage.image = #imageLiteral(resourceName: "usa")
-        case "Spanish Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "spanishgp")
-            flagImage.image = #imageLiteral(resourceName: "spain")
-        case "Monaco Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "monacogp")
-            flagImage.image = #imageLiteral(resourceName: "monaco")
-        case "Azerbaijan Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "azerbaijangp")
-            flagImage.image = #imageLiteral(resourceName: "azerbaijan")
-        case "Canadian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "canadiangp")
-            flagImage.image = #imageLiteral(resourceName: "canada")
-        case "British Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "britishgp")
-            flagImage.image = #imageLiteral(resourceName: "britain")
-        case "Austrian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "austriangp")
-            flagImage.image = #imageLiteral(resourceName: "austria")
-        case "French Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "frenchgp")
-            flagImage.image = #imageLiteral(resourceName: "france")
-        case "Hungarian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "hungariangp")
-            flagImage.image = #imageLiteral(resourceName: "hungary")
-        case "Belgian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "belgiangp")
-            flagImage.image = #imageLiteral(resourceName: "belgium")
-        case "Dutch Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "dutchgp")
-            flagImage.image = #imageLiteral(resourceName: "dutch")
-        case "Italian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "italiangp")
-            flagImage.image = #imageLiteral(resourceName: "italy")
-        case "Singapore Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "singaporegp")
-            flagImage.image = #imageLiteral(resourceName: "singapore")
-        case "Japanese Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "japanesegp")
-            flagImage.image = #imageLiteral(resourceName: "japan")
-        case "United States Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "usagp")
-            flagImage.image = #imageLiteral(resourceName: "usa")
-        case "Mexico City Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "mexicangp")
-            flagImage.image = #imageLiteral(resourceName: "mexico")
-        case "Brazilian Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "braziliangp")
-            flagImage.image = #imageLiteral(resourceName: "brazil")
-        case "Abu Dhabi Grand Prix":
-            trackImage.image = #imageLiteral(resourceName: "abudhabigp")
-            flagImage.image = #imageLiteral(resourceName: "uae")
-        default:
-            break
-        }
-        
-        flagImage.frame.size = CGSize(width: imageWidth, height: imageHeight)
-        raceLabel.text = trackInfo[1][0]
+        guard let safeTrack = trackInfo else { return }
+        raceLabel.text = safeTrack.raceName
         
         setTimes()
     }
     
     func setTimes() {
+//        guard let safeTrack = trackInfo else { return }
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 250)
         
-        weekendLabel.text = getDates(startDay: "\(trackInfo[2][1])T\(trackInfo[2][2])", endDay: "\(trackInfo[6][0])T\(trackInfo[7][0])")
-        weekendLabel.font = UIFont(name: "Formula1-Display-Regular", size: 23)
-        weekendLabel.textColor = #colorLiteral(red: 0.7961815596, green: 0.3117287159, blue: 0.08521645516, alpha: 1)
-        weekendLabel.textAlignment = .right
-        weekendLabel.sizeToFit()
+        let infoView = UIStackView()
+        infoView.frame.size = scrollView.contentSize
+        infoView.axis = .vertical
         
-        var horzStack: UIStackView
-        var seshLabel: UILabel
-        var timeLabel: UILabel
-              
-        for time in trackInfo[2...5] {
-            horzStack = UIStackView()
-            horzStack.axis = .horizontal
-            horzStack.distribution = .fillProportionally
-            
-            seshLabel = UILabel()
-            timeLabel = UILabel()
-            
-            let session = getSession(time[0])
-            let day = getDay(time[1])
-            let start = getTime("\(time[1])T\(time[2])")
-            
-            seshLabel.text = "\(session):"       //\(day) \(start)"
-            seshLabel.textColor = .black
-            seshLabel.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-            seshLabel.textAlignment = .left
-            
-            
-            timeLabel.text = "\(day) \(start)"
-            timeLabel.textColor = .black
-            timeLabel.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-            timeLabel.textAlignment = .right
-            
-            horzStack.addArrangedSubview(seshLabel)
-            horzStack.addArrangedSubview(timeLabel)
-            
-            timeView.addArrangedSubview(horzStack)
-        }
+        let headerView = UIStackView()
+        headerView.axis = .horizontal
         
-        horzStack = UIStackView()
-        horzStack.axis = .horizontal
-        horzStack.distribution = .fillProportionally
+        let trackView = UIImageView()
+        trackView.frame.size = CGSize(width: scrollView.frame.width * 0.6, height: scrollView.frame.width * 0.6)
+        trackView.image = #imageLiteral(resourceName: "mexicangp")
+        headerView.addArrangedSubview(trackView)
+//        trackView.translatesAutoresizingMaskIntoConstraints = false
+//        trackView.heightAnchor.constraint(equalToConstant: trackView.frame.height).isActive = true
+//        trackView.widthAnchor.constraint(equalToConstant: trackView.frame.width).isActive = true
         
-        seshLabel = UILabel()
-        timeLabel = UILabel()
+        let flagView = UIImageView()
+        flagView.frame.size = CGSize(width: scrollView.frame.width * 0.4, height: scrollView.frame.width * 0.4)
+        flagView.image = #imageLiteral(resourceName: "germany")
+        headerView.addArrangedSubview(flagView)
+//        flagView.translatesAutoresizingMaskIntoConstraints = false
+//        flagView.heightAnchor.constraint(equalToConstant: flagView.frame.height).isActive = true
+//        flagView.widthAnchor.constraint(equalToConstant: flagView.frame.width).isActive = true
         
-        let day = getDay(trackInfo[6][0])
-        let start = getTime("\(trackInfo[6][0])T\(trackInfo[7][0])")
-        
-        seshLabel.text = "Race:"
-        seshLabel.textColor = .black
-        seshLabel.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-        seshLabel.textAlignment = .left
-        
-        timeLabel.text = "\(day) \(start)"
-        timeLabel.textColor = .black
-        timeLabel.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-        timeLabel.textAlignment = .right
-        
-        horzStack.addArrangedSubview(seshLabel)
-        horzStack.addArrangedSubview(timeLabel)
-        
-        timeView.addArrangedSubview(horzStack)
-        
-        scrollView.addSubview(timeView)
+        infoView.addArrangedSubview(headerView)
+        scrollView.addSubview(infoView)
     }
     
     func getDates(startDay: String, endDay: String) -> String {
@@ -236,5 +117,78 @@ class RaceViewController: UIViewController {
         
         return dateFormatter.string(from: dateObj)
     }
+    
+//    func setImages(_ raceName: String) {
+//        switch raceName {
+//        case "Bahrain Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "bahraingp")
+//            flagImage.image = #imageLiteral(resourceName: "bahrain")
+//        case "Saudi Arabian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "saudigp")
+//            flagImage.image = #imageLiteral(resourceName: "saudi")
+//        case "Australian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "australiangp")
+//            flagImage.image = #imageLiteral(resourceName: "australia")
+//        case "Emilia Romagna Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "ergp")
+//            flagImage.image = #imageLiteral(resourceName: "italy")
+//        case "Miami Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "miamigp")
+//            flagImage.image = #imageLiteral(resourceName: "usa")
+//        case "Spanish Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "spanishgp")
+//            flagImage.image = #imageLiteral(resourceName: "spain")
+//        case "Monaco Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "monacogp")
+//            flagImage.image = #imageLiteral(resourceName: "monaco")
+//        case "Azerbaijan Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "azerbaijangp")
+//            flagImage.image = #imageLiteral(resourceName: "azerbaijan")
+//        case "Canadian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "canadiangp")
+//            flagImage.image = #imageLiteral(resourceName: "canada")
+//        case "British Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "britishgp")
+//            flagImage.image = #imageLiteral(resourceName: "britain")
+//        case "Austrian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "austriangp")
+//            flagImage.image = #imageLiteral(resourceName: "austria")
+//        case "French Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "frenchgp")
+//            flagImage.image = #imageLiteral(resourceName: "france")
+//        case "Hungarian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "hungariangp")
+//            flagImage.image = #imageLiteral(resourceName: "hungary")
+//        case "Belgian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "belgiangp")
+//            flagImage.image = #imageLiteral(resourceName: "belgium")
+//        case "Dutch Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "dutchgp")
+//            flagImage.image = #imageLiteral(resourceName: "dutch")
+//        case "Italian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "italiangp")
+//            flagImage.image = #imageLiteral(resourceName: "italy")
+//        case "Singapore Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "singaporegp")
+//            flagImage.image = #imageLiteral(resourceName: "singapore")
+//        case "Japanese Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "japanesegp")
+//            flagImage.image = #imageLiteral(resourceName: "japan")
+//        case "United States Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "usagp")
+//            flagImage.image = #imageLiteral(resourceName: "usa")
+//        case "Mexico City Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "mexicangp")
+//            flagImage.image = #imageLiteral(resourceName: "mexico")
+//        case "Brazilian Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "braziliangp")
+//            flagImage.image = #imageLiteral(resourceName: "brazil")
+//        case "Abu Dhabi Grand Prix":
+//            trackImage.image = #imageLiteral(resourceName: "abudhabigp")
+//            flagImage.image = #imageLiteral(resourceName: "uae")
+//        default:
+//            break
+//        }
+//    }
 
 }

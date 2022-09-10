@@ -22,23 +22,46 @@ private struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
-        guard let race = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "schedule") as? [[String]] else { return }
+        struct ScheduleInfoWidget: Codable {
+            let round: String
+            
+            let raceName: String
+            let circuit: String
+            let flag: String
+            
+            let weekend: String
+            let s1: SessionWidget
+            let s2: SessionWidget
+            let s3: SessionWidget
+            let s4: SessionWidget
+            let race: SessionWidget
+            
+            struct SessionWidget: Codable {
+                let name: String
+                let time: String
+            }
+            
+        }
         
-        let round = race[0][0]
-        let weekend = race[1][0]
-        let raceName = race[2][0]
-        let sess1 = race[3][0]
-        let sess1Time = race[3][1]
-        let sess2 = race[4][0]
-        let sess2Time = race[4][1]
-        let sess3 = race[5][0]
-        let sess3Time = race[5][1]
-        let sess4 = race[6][0]
-        let sess4Time = race[6][1]
-        let sess5 = race[7][0]
-        let sess5Time = race[7][1]
-        let track = race[8][0]
-        let flag = race[8][1]
+        guard let race = UserDefaults(suiteName: "group.formulaOnedget")?.value(forKey: "schedule") as? Data else { return }
+        
+        guard let formRace = try? JSONDecoder().decode(ScheduleInfoWidget.self, from: race) else { return }
+        
+        let round = formRace.round
+        let weekend = formRace.weekend
+        let raceName = formRace.raceName
+        let sess1 = formRace.s1.name
+        let sess1Time = formRace.s1.time
+        let sess2 = formRace.s2.name
+        let sess2Time = formRace.s2.time
+        let sess3 = formRace.s3.name
+        let sess3Time = formRace.s3.time
+        let sess4 = formRace.s4.name
+        let sess4Time = formRace.s4.time
+        let sess5 = formRace.race.name
+        let sess5Time = formRace.race.time
+        let track = formRace.circuit
+        let flag = formRace.flag
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
