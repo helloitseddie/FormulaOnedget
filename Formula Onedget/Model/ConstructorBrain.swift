@@ -52,6 +52,7 @@ struct ConstructorBrain {
         }
         
         self.userDefaults?.setValue(constArray, forKey: "constructorStandings")
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func handleDrivers(data: Data?, response: URLResponse?, error: Error?) {
@@ -84,6 +85,7 @@ struct ConstructorBrain {
         }
         
         self.userDefaults?.setValue(newConstArray, forKey: "constructorStandingsWithDrivers")
+        WidgetCenter.shared.reloadAllTimelines()
 
     }
 }

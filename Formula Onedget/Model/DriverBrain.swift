@@ -48,6 +48,7 @@ struct DriverBrain {
         }
         
         self.userDefaults?.setValue(driverArray, forKey: "driverStandings")
+        WidgetCenter.shared.reloadAllTimelines()
 
     }
 }

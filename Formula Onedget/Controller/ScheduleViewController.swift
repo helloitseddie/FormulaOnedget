@@ -34,9 +34,9 @@ class ScheduleViewController: UIViewController {
     }
     
     fileprivate func setSchedule() {
-        guard let schedule = self.userDefaults?.value(forKey: "scheduleApp") as? [[[String]]] else { return }
+        guard let schedule = self.userDefaults?.value(forKey: "scheduleApp") as? [Data] else { return }
         
-        let containerHeight: Float = (100.0 * Float(schedule.count)) + (10.0 * Float(schedule.count))
+        let containerHeight: Float = (100.0 * Float(schedule.count)) + 100 + (5.0 * Float(schedule.count - 1))
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: CGFloat(containerHeight))
         
         labelView.frame.size = CGSize(width: scrollView.contentSize.width, height: scrollView.contentSize.height)
@@ -48,42 +48,174 @@ class ScheduleViewController: UIViewController {
         
         scrollView.isUserInteractionEnabled = true
         labelView.isUserInteractionEnabled = true
+        labelView.translatesAutoresizingMaskIntoConstraints = false
         
+        var labelContainer: UIView
         var labelBG: UIImageView
-        var butt: UIButton
-        var isNextRace = true
+        var raceInfo: UIStackView
         
+        var raceName: UILabel
+        
+        var isNextRace = true
         var offset: Float = 0
         
-        for race in schedule {
-            labelBG = UIImageView()
-            labelBG.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(100))
-            labelBG.image = #imageLiteral(resourceName: "slotBG")
-            labelBG.isUserInteractionEnabled = true
+        var raceButt: UIButton
+        
+        var leftSection: UIStackView
+        var middleSection: UIStackView
+        var rightSection: UIStackView
+        
+        var timerView: UIView
+        
+        for raceRaw in schedule {
+            guard let race = try? JSONDecoder().decode(ScheduleInfo.self, from: raceRaw) else { return }
+            labelContainer = UIView()
+            labelContainer.isUserInteractionEnabled = true
+            labelContainer.translatesAutoresizingMaskIntoConstraints = false
             
-            butt = UIButton()
-            butt.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: CGFloat(100))
-            butt.setTitle("\(race[0][0]). \(race[1][0])", for: .normal)
+            labelBG = UIImageView()
+            labelBG.image = #imageLiteral(resourceName: "slotBG")
+            
+            timerView = UIView()
+            
+            raceButt = UIButton()
+            raceButt.backgroundColor = .clear
+            raceButt.tag = race.round - 1
+            raceButt.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+            
+            raceName = UILabel()
                                  
-            if checkDate("\(race[6][0])T\(race[7][0])") && isNextRace {
-                butt.setTitleColor(#colorLiteral(red: 0.7961815596, green: 0.3117287159, blue: 0.08521645516, alpha: 1), for: .normal)
-                offset = (Float(scrollView.contentSize.height) / Float(schedule.count) * Float(Int(race[0][0])!))
-                offset -= Float(scrollView.frame.height / 2)
-                self.userDefaults?.setValue(formatRace(race), forKey: "schedule")
+            if checkDate("\(race.race.date)T\(race.race.time)") && isNextRace {
+                raceName.textColor = #colorLiteral(red: 0.7961815596, green: 0.3117287159, blue: 0.08521645516, alpha: 1)
+                offset = (Float(scrollView.contentSize.height) / Float(schedule.count) * Float(race.round))
+                offset -= (Float(scrollView.frame.height / 2) + 50)
+//                self.userDefaults?.setValue(formatRace(race), forKey: "schedule")
+                
+                labelContainer.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(200))
+                labelContainer.heightAnchor.constraint(equalToConstant: CGFloat(200)).isActive = true
+                labelBG.frame.size = CGSize(width: scrollView.contentSize.width - 20, height: CGFloat(200))
+                
+                timerView.backgroundColor = #colorLiteral(red: 0.7961815596, green: 0.3117287159, blue: 0.08521645516, alpha: 1)
+                timerView.frame.size = CGSize(width: labelBG.frame.width, height: CGFloat(100))
+                timerView.center.x = labelContainer.center.x
+                timerView.center.y = labelContainer.center.y + 50
+                
+                raceButt.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(200))
+                raceButt.center = labelContainer.center
+                
                 isNextRace = false
             } else {
-                butt.setTitleColor(.black, for: .normal)
+                raceName.textColor = .black
+                labelContainer.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(100))
+                labelContainer.heightAnchor.constraint(equalToConstant: CGFloat(100)).isActive = true
+                labelBG.frame.size = CGSize(width: scrollView.contentSize.width - 20, height: CGFloat(100))
+                
+                raceButt.frame.size = CGSize(width: scrollView.contentSize.width, height: CGFloat(100))
+                raceButt.center = labelContainer.center
             }
-                                 
-            butt.titleLabel?.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-            butt.titleLabel?.textAlignment = .center
-            butt.tag = Int(race[0][0])! - 1
-            butt.isUserInteractionEnabled = true
-            butt.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
             
-            butt.center = labelBG.center
-            labelBG.addSubview(butt)
-            labelView.addArrangedSubview(labelBG)
+            labelContainer.addSubview(labelBG)
+            
+            raceInfo = UIStackView()
+            raceInfo.axis = .horizontal
+            raceInfo.frame.size = CGSize(width: labelBG.frame.width, height: CGFloat(100))
+            raceInfo.center.x = labelBG.center.x
+
+            leftSection = UIStackView()
+            leftSection.axis = .vertical
+            leftSection.distribution = .fillEqually
+            leftSection.spacing = 5
+            leftSection.frame.size = CGSize(width: raceInfo.frame.width / 5, height: raceInfo.frame.height)
+
+            middleSection = UIStackView()
+            middleSection.frame.size = CGSize(width: raceInfo.frame.width * 0.6, height: labelBG.frame.height - 10)
+            middleSection.axis = .vertical
+            middleSection.spacing = -8
+            middleSection.distribution = .fillEqually
+
+            rightSection = UIStackView()
+            rightSection.frame.size = CGSize(width: raceInfo.frame.width / 5, height: raceInfo.frame.height)
+
+            // Left
+            let round = UILabel()
+            round.text = "  Round\n  \(race.round)"
+            round.numberOfLines = 0
+            round.frame.size = CGSize(width: leftSection.frame.width, height: raceInfo.frame.height / 4)
+            round.widthAnchor.constraint(equalToConstant: leftSection.frame.width).isActive = true
+            round.font = UIFont(name: "Formula1-Display-Regular", size: 14)
+            round.textColor = .black
+            round.textAlignment = .center
+            round.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            round.layer.borderWidth = 5
+            round.layer.cornerRadius = 8
+            leftSection.addArrangedSubview(round)
+
+            // Mid
+            let raceLocale = UILabel()
+            raceLocale.numberOfLines = 0
+            raceLocale.text = "\(race.city), \(race.country)"
+            raceLocale.frame.size = CGSize(width: middleSection.frame.width, height: 12.5)
+            raceLocale.font = UIFont(name: "Formula1-Display-Regular", size: 14)
+            raceLocale.textAlignment = .left
+            raceLocale.sizeToFit()
+
+            raceName.text = "\(race.raceName)"
+            raceName.frame.size = CGSize(width: middleSection.frame.width, height: 18.5)
+            raceName.font = UIFont(name: "Formula1-Display-Regular", size: 20)
+            raceName.adjustsFontSizeToFitWidth = true
+            raceName.textAlignment = .left
+            raceName.sizeToFit()
+
+            let raceCircuit = UILabel()
+            raceCircuit.numberOfLines = 0
+            raceCircuit.text = race.circuitName
+            raceCircuit.frame.size = CGSize(width: middleSection.frame.width, height: 12.5)
+            raceCircuit.font = UIFont(name: "Formula1-Display-Regular", size: 14)
+            raceCircuit.textAlignment = .left
+            raceCircuit.sizeToFit()
+
+            raceLocale.textColor = raceName.textColor
+            raceCircuit.textColor = raceName.textColor
+            
+            middleSection.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            middleSection.layer.borderWidth = 5
+            middleSection.layer.cornerRadius = 8
+
+            middleSection.addArrangedSubview(raceLocale)
+            middleSection.addArrangedSubview(raceName)
+            middleSection.addArrangedSubview(raceCircuit)
+
+            // Right
+            let weekend = UILabel()
+            let weekendText = getDates(startDay: "\(race.fp1.date)T\(race.fp1.time)", endDay: "\(race.race.date)T\(race.race.time)")
+            let weekendArr = weekendText.components(separatedBy: " - ")
+            weekend.text = "\(weekendArr[0])\n-\n\(weekendArr[1])"
+            weekend.numberOfLines = 0
+            weekend.frame.size = CGSize(width: rightSection.frame.width, height: raceInfo.frame.height)
+            weekend.widthAnchor.constraint(equalToConstant: rightSection.frame.width).isActive = true
+            weekend.frame.size = CGSize(width: rightSection.frame.width, height: raceInfo.frame.height)
+            weekend.font = UIFont(name: "Formula1-Display-Regular", size: 14)
+            weekend.textAlignment = .center
+            weekend.sizeToFit()
+            weekend.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            weekend.layer.borderWidth = 5
+            weekend.layer.cornerRadius = 8
+            rightSection.addArrangedSubview(weekend)
+
+            raceInfo.addArrangedSubview(leftSection)
+            raceInfo.addArrangedSubview(middleSection)
+            raceInfo.addArrangedSubview(rightSection)
+            raceInfo.center.x = labelContainer.center.x
+            rightSection.trailingAnchor.constraint(equalTo: raceInfo.trailingAnchor, constant: 20).isActive = true
+
+            labelContainer.addSubview(raceInfo)
+            raceInfo.topAnchor.constraint(equalTo: labelContainer.topAnchor).isActive = true
+            
+            labelContainer.addSubview(timerView)
+            labelContainer.addSubview(raceButt)
+            labelView.addArrangedSubview(labelContainer)
+            
+            labelBG.center = labelContainer.center
         }
         
         scrollView.addSubview(labelView)
@@ -132,8 +264,6 @@ class ScheduleViewController: UIViewController {
         tempVal.append("Race") // race times
         tempVal.append("\(getDay("\(race[6][0])")) \(getTime("\(race[6][0])T\(race[7][0])"))")
         formRace.append(tempVal)
-        
-        print("Eddie - \(formRace)")
         
         formRace.append(widgetImages(race[1][0])) // images
         

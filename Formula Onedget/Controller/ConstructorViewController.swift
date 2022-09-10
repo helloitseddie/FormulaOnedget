@@ -120,12 +120,13 @@ class ConstructorViewController: UIViewController {
             flagView.contentMode = .scaleAspectFit
             flagStack.addArrangedSubview(flagView)
             
-            let rightPadLabel = UILabel()
-            rightPadLabel.frame.size = CGSize(width: flagStack.frame.width - 43, height: CGFloat(25))
-            rightPadLabel.text = "    \(constructor.drivers.joined(separator: " / "))"
-            rightPadLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
-            rightPadLabel.adjustsFontSizeToFitWidth = true
-            flagStack.addArrangedSubview(rightPadLabel)
+            let driversLabel = UILabel()
+            driversLabel.frame.size = CGSize(width: flagStack.frame.width - 43, height: CGFloat(25))
+            driversLabel.text = "    \(constructor.drivers.joined(separator: " / "))"
+            driversLabel.font = UIFont(name: "Formula1-Display-Regular", size: 12)
+            driversLabel.textColor = .black
+            driversLabel.adjustsFontSizeToFitWidth = true
+            flagStack.addArrangedSubview(driversLabel)
 
             constStack.addArrangedSubview(constLabel)
             constStack.addArrangedSubview(flagStack)

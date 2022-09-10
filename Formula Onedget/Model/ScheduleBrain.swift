@@ -31,32 +31,35 @@ struct ScheduleBrain {
         guard let formData = try? JSONDecoder().decode(Schedule.self, from: testData) else { return }
         let apiData = formData.MRData.RaceTable.Races
         
-        
-        var appArray: [[[String]]] = []
-        var raceInfo: [[String]] = []
+        var appArray: [Data] = []
+        let encoder = JSONEncoder()
+        var fp1: Session
+        var fp2: Session
+        var fp3: Session?
+        var quali: Session
+        var sprint: Session?
+        var raceTime: Session
         
         for race in apiData {
-            raceInfo.append([race.round])
-            raceInfo.append([race.raceName])
+            fp1 = Session(date: race.FirstPractice.date, time: race.FirstPractice.time)
+            fp2 = Session(date: race.SecondPractice.date, time: race.SecondPractice.time)
+            quali = Session(date: race.Qualifying.date, time: race.Qualifying.time)
+            
             if race.ThirdPractice != nil {
-                raceInfo.append(["FirstPractice", race.FirstPractice.date, race.FirstPractice.time])
-                raceInfo.append(["SecondPractice", race.SecondPractice.date, race.SecondPractice.time])
-                raceInfo.append(["ThirdPractice", race.ThirdPractice!.date, race.ThirdPractice!.time])
-                raceInfo.append(["Qualifying", race.Qualifying.date, race.Qualifying.time])
+                fp3 = Session(date: race.ThirdPractice!.date, time: race.ThirdPractice!.time)
             } else if race.Sprint != nil {
-                raceInfo.append(["FirstPractice", race.FirstPractice.date, race.FirstPractice.time])
-                raceInfo.append(["Qualifying", race.Qualifying.date, race.Qualifying.time])
-                raceInfo.append(["SecondPractice", race.SecondPractice.date, race.SecondPractice.time])
-                raceInfo.append(["Sprint", race.Sprint!.date, race.Sprint!.time])
+                sprint = Session(date: race.Sprint!.date, time: race.Sprint!.time)
             }
-            raceInfo.append([race.date])
-            raceInfo.append([race.time])
-            appArray.append(raceInfo)
-
-            raceInfo = []
+            
+            raceTime = Session(date: race.date, time: race.time)
+            
+            guard let encoded = try? encoder.encode(ScheduleInfo(roundRaw: race.round, raceName: race.raceName, circuitName: race.Circuit.circuitName, country: race.Circuit.Location.country, city: race.Circuit.Location.locality, fp1: fp1, fp2: fp2, fp3: fp3, sprint: sprint, quali: quali, race: raceTime)) else { return }
+            
+            appArray.append(encoded)
         }
         
         self.userDefaults?.setValue(appArray, forKey: "scheduleApp")
+        WidgetCenter.shared.reloadAllTimelines()
 
     }
 }

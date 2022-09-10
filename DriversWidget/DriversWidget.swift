@@ -99,7 +99,7 @@ private struct DriversWidgetEntryView : View {
                 .inset(by: 5))
             
             VStack {
-                Text("Drivers' Championship").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
+                Text("Drivers Standings").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
                 
                 Rectangle().fill(Color("darkTeal")).frame(width: 125, height: 2)
                 

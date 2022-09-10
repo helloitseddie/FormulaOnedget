@@ -100,7 +100,7 @@ private struct ConstructorsWidgetEntryView : View {
                 .inset(by: 5))
             
             VStack {
-                Text("Constructors' Championship").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
+                Text("Constructors Standings").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
                 
                 Rectangle().fill(Color("darkTeal")).frame(width: 125, height: 2)
                 
