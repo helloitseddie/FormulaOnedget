@@ -47,7 +47,9 @@ struct ScheduleBrain {
             
             if race.ThirdPractice != nil {
                 fp3 = Session(date: race.ThirdPractice!.date, time: race.ThirdPractice!.time)
+                sprint = nil
             } else if race.Sprint != nil {
+                fp3 = nil
                 sprint = Session(date: race.Sprint!.date, time: race.Sprint!.time)
             }
             

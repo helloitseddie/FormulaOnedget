@@ -74,6 +74,7 @@ struct IndividualRace: Codable {
     let round: String
     
     let raceName: String
+    let circuitName: String
     let circuit: String
     let flag: String
     
@@ -83,6 +84,7 @@ struct IndividualRace: Codable {
     let s3: IndividualRaceSession
     let s4: IndividualRaceSession
     let race: IndividualRaceSession
+    let raceRaw: Session
 }
 
 struct IndividualRaceSession: Codable {

@@ -102,65 +102,89 @@ private struct ScheduleWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            Image("mediumImage").resizable()
-            
-            Rectangle()
-                .fill(.white)
-                .clipShape(ContainerRelativeShape()
-                .inset(by: 5))
-            
-            VStack(spacing: 0) {
-                HStack(spacing: 15) {
-                    // left title
-                    Text("Round \(entry.round)").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
+        GeometryReader { geo in
+            ZStack {
+                Image("mediumImage").resizable()
+                
+                Rectangle()
+                    .fill(.white)
+                    .clipShape(ContainerRelativeShape()
+                    .inset(by: 5))
+                
+                VStack(spacing: 0) {
+                    HStack(spacing: 15) {
+                        // left title
+                        Text("Round \(entry.round)").foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
+                        
+                        Image(entry.flag).resizable()
+                            .frame(width: 30.0, height: 30).shadow(color: .gray, radius: 5, x: 0, y: 5)
                     
-                    Image(entry.flag).resizable()
-                        .frame(width: 30.0, height: 30).shadow(color: .gray, radius: 5, x: 0, y: 5)
-                
-                    // right title
-                    Text(entry.weekend).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
-                }
-                
-                Rectangle().fill(Color("darkTeal")).frame(width: 300, height: 2).padding(.bottom, 5)
-                
-                HStack { // left and right
-                    VStack(spacing: 0) { // left side
-                        
-                        Text(entry.raceName).foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                        
-                        Image(entry.track).resizable()
-                            .frame(width: 75.0, height: 75.0).shadow(color: .gray, radius: 5, x: 0, y: 5)
+                        // right title
+                        Text(entry.weekend).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 16))
                     }
                     
-                    VStack(alignment: .trailing, spacing: 7) { // right side
-                        HStack(spacing: 15) {
-                            Text("\(entry.sess1): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12)).frame(alignment: .leading)
+                    Rectangle().fill(Color("darkTeal")).frame(width: 300, height: 2).padding(.bottom, 5)
+                    
+                    HStack { // left and right
+                        VStack(alignment: .center, spacing: 0) { // left side
                             
-                            Text(entry.sess1Time).foregroundColor(.orange).font(Font.custom("formula1", size: 12))
+                            Text(entry.raceName).foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 14)).lineLimit(2).padding(.leading, 10.0)
+                            
+                            Image(entry.track).resizable()
+                                .padding(0.0)
+                                .frame(width: 75.0, height: 75.0).shadow(color: .gray, radius: 5, x: 0, y: 5)
                         }
+                        .frame(width: geo.size.width * 0.4)
                         
-                        HStack(spacing: 15) {
-                            Text("\(entry.sess2): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                            Text(entry.sess2Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                        }
-                        
-                        HStack(spacing: 15) {
-                            Text("\(entry.sess3): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                            Text(entry.sess3Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                        }
-                        
-                        HStack(spacing: 15) {
-                            Text("\(entry.sess4): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                            Text(entry.sess4Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                        }
-                        
-                        HStack(spacing: 15) {
-                            Text("\(entry.sess5): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
-                            Text(entry.sess5Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                        VStack(alignment: .leading, spacing: 7) { // right side
+                            HStack(spacing: 5) {
+                                Text("\(entry.sess1): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12)).frame(alignment: .leading)
+                                    .lineLimit(1).fixedSize()
+                                Spacer(minLength: 1)
+                                Text(entry.sess1Time).foregroundColor(.orange).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                            }
+                            .padding(.trailing, 6.0)
+                            
+                            HStack(spacing: 5) {
+                                Text("\(entry.sess2): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                                Spacer(minLength: 1)
+                                Text(entry.sess2Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                            }
+                            .padding(.trailing, 6.0)
+                            
+                            HStack(spacing: 5) {
+                                Text("\(entry.sess3): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                                Spacer(minLength: 1)
+                                Text(entry.sess3Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                            }
+                            .padding(.trailing, 6.0)
+                            
+                            HStack(spacing: 5) {
+                                Text("\(entry.sess4): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                                Spacer(minLength: 1)
+                                Text(entry.sess4Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                            }
+                            .padding(.trailing, 6.0)
+                            
+                            HStack(spacing: 5) {
+                                Text("\(entry.sess5): ").foregroundColor(Color("darkTeal")).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                                Spacer(minLength: -100)
+                                Text(entry.sess5Time).foregroundColor(.orange).multilineTextAlignment(.center).font(Font.custom("formula1", size: 12))
+                                    .lineLimit(1).fixedSize()
+                            }
+                            .padding(.trailing, 6.0)
                         }
                     }
                 }
+                .padding(.all, 5.0)
             }
         }
     }

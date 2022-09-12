@@ -31,6 +31,8 @@ class ScheduleViewController: UIViewController {
     let minTimer = UILabel()
     let secTimer = UILabel()
     
+    var countdown: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,6 +131,7 @@ class ScheduleViewController: UIViewController {
             round.frame.size = CGSize(width: labelBG.frame.width * 0.2, height: 50)
             round.text = "\nRound\n\(race.round)\n"
             round.font = UIFont(name: "Formula1-Display-Regular", size: 14)
+            round.textColor = .black
             round.numberOfLines = 0
             round.textAlignment = .center
             round.layer.borderColor = #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1)
@@ -148,6 +151,7 @@ class ScheduleViewController: UIViewController {
             weekend.numberOfLines = 0
             weekend.frame.size = CGSize(width: labelBG.frame.width * 0.2, height: 50)
             weekend.font = UIFont(name: "Formula1-Display-Regular", size: 14)
+            weekend.textColor = .black
             weekend.textAlignment = .center
             weekend.layer.borderColor = #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1)
             weekend.layer.borderWidth = 2
@@ -175,7 +179,8 @@ class ScheduleViewController: UIViewController {
             raceName.text = "\(race.raceName)"
             raceName.frame.size = CGSize(width: labelBG.frame.width * 0.6, height: 18.5)
             raceName.font = UIFont(name: "Formula1-Display-Regular", size: 20)
-            raceName.numberOfLines = 0
+            raceName.numberOfLines = 2
+            raceName.adjustsFontSizeToFitWidth = true
             labelBG.addSubview(raceName)
             raceName.translatesAutoresizingMaskIntoConstraints = false
             raceName.topAnchor.constraint(equalTo: raceLocale.bottomAnchor, constant: 10).isActive = true
@@ -234,6 +239,7 @@ class ScheduleViewController: UIViewController {
         let s3: IndividualRaceSession
         let s4: IndividualRaceSession
         let main: IndividualRaceSession
+        let mainRaw: Session
         
         images = widgetImages(race.raceName)
         weekend = getDates(startDay: "\(race.fp1.date)T\(race.fp1.time)", endDay: "\(race.race.date)T\(race.race.time)")
@@ -251,8 +257,9 @@ class ScheduleViewController: UIViewController {
         }
         
         main = IndividualRaceSession(name: "Race", time: "\(getDay("\(race.race.date)")) \(getTime("\(race.race.date)T\(race.race.time)"))")
+        mainRaw = Session(date: race.race.date, time: race.race.time)
         
-        let widgetRace = IndividualRace(round: race.roundRaw, raceName: race.raceName, circuit: images[0], flag: images[1], weekend: weekend, s1: s1, s2: s2, s3: s3, s4: s4, race: main)
+        let widgetRace = IndividualRace(round: race.roundRaw, raceName: race.raceName, circuitName: race.circuitName, circuit: images[0], flag: images[1], weekend: weekend, s1: s1, s2: s2, s3: s3, s4: s4, race: main, raceRaw: mainRaw)
         
         guard let encoded = try? encoder.encode(widgetRace) else { return nil }
         
@@ -397,7 +404,7 @@ class ScheduleViewController: UIViewController {
         weekTimer.topAnchor.constraint(equalTo: weekView.topAnchor, constant: 5).isActive = true
         weekLabel.topAnchor.constraint(equalTo: weekImage.bottomAnchor).isActive = true
         
-        weekView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        weekView.addTimerBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
         timerStack.addArrangedSubview(weekView)
         
         
@@ -429,7 +436,7 @@ class ScheduleViewController: UIViewController {
         dayTimer.topAnchor.constraint(equalTo: dayView.topAnchor, constant: 5).isActive = true
         dayLabel.topAnchor.constraint(equalTo: dayImage.bottomAnchor).isActive = true
         
-        dayView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        dayView.addTimerBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
         timerStack.addArrangedSubview(dayView)
         
         // Hour
@@ -460,7 +467,7 @@ class ScheduleViewController: UIViewController {
         hourTimer.topAnchor.constraint(equalTo: hourView.topAnchor, constant: 5).isActive = true
         hourLabel.topAnchor.constraint(equalTo: hourImage.bottomAnchor).isActive = true
         
-        hourView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        hourView.addTimerBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
         timerStack.addArrangedSubview(hourView)
         
         // minute
@@ -491,7 +498,7 @@ class ScheduleViewController: UIViewController {
         minTimer.topAnchor.constraint(equalTo: minView.topAnchor, constant: 5).isActive = true
         minLabel.topAnchor.constraint(equalTo: minImage.bottomAnchor).isActive = true
         
-        minView.addBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
+        minView.addTimerBorder(withColor:  #colorLiteral(red: 0, green: 0.2951171398, blue: 0.3895429075, alpha: 1), andThickness: 2)
         timerStack.addArrangedSubview(minView)
         
         // second
@@ -538,7 +545,7 @@ class ScheduleViewController: UIViewController {
         minTimer.isHidden = false
         secTimer.isHidden = false
         
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        countdown = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             let nowDate = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -596,13 +603,21 @@ class ScheduleViewController: UIViewController {
                 if seconds <= 0 && secondsRaw <= 0 {
                     self.secTimer.isHidden = true
                     self.secImage.isHidden = false
+                    timer.invalidate()
                 } else {
                     self.secTimer.isHidden = false
                     self.secImage.isHidden = true
                 }
             }
         }
-        
+        guard let safeCountdown = countdown else { return }
+        safeCountdown.fire()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let safeCountdown = countdown else { return }
+        safeCountdown.invalidate()
     }
 }
 
@@ -623,11 +638,7 @@ extension ScheduleViewController {
 
 extension UIView {
     
-    enum ViewSide {
-        case Left, Right, Top, Bottom
-    }
-    
-    func addBorder(withColor color: CGColor, andThickness thickness: CGFloat) {
+    func addTimerBorder(withColor color: CGColor, andThickness thickness: CGFloat) {
         
         let border = CALayer()
         border.backgroundColor = color
