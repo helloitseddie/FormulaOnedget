@@ -449,7 +449,7 @@
         <!--FutureRaceViewController-->
         <scene sceneID="7y7-R7-SUJ">
             <objects>
-                <viewController storyboardIdentifier="RaceView" id="Y3P-Y6-cO4" userLabel="FutureRaceViewController" customClass="RaceViewController" customModule="Formula_Onedget" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FutureRaceView" id="Y3P-Y6-cO4" userLabel="FutureRaceViewController" customClass="FutureRaceViewController" customModule="Formula_Onedget" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HI4-AV-7m4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -463,7 +463,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="slotBG" translatesAutoresizingMaskIntoConstraints="NO" id="kRP-3A-vfI" userLabel="TitleBG">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Race" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bba-no-ID1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Future Race" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bba-no-ID1">
                                         <rect key="frame" x="15" y="48.5" width="384" height="32"/>
                                         <color key="tintColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="Formula1-Display-Regular" family="Formula1" pointSize="32"/>
@@ -519,7 +519,82 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svf-1a-VLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2637.68115942029" y="787.5"/>
+            <point key="canvasLocation" x="2287" y="801"/>
+        </scene>
+        <!--PastRaceViewController-->
+        <scene sceneID="PHL-r8-gb7">
+            <objects>
+                <viewController storyboardIdentifier="PastRaceView" id="3fp-lf-gzq" userLabel="PastRaceViewController" customClass="PastRaceViewController" customModule="Formula_Onedget" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TVr-kb-kG3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" highlightedImage="Image" translatesAutoresizingMaskIntoConstraints="NO" id="SAc-gI-iN5" userLabel="background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYm-p1-QlC" userLabel="TitleView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="slotBG" translatesAutoresizingMaskIntoConstraints="NO" id="6bL-Tz-m2Z" userLabel="TitleBG">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Race" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AtD-Q5-I0U">
+                                        <rect key="frame" x="15" y="48.5" width="384" height="32"/>
+                                        <color key="tintColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="Formula1-Display-Regular" family="Formula1" pointSize="32"/>
+                                        <color key="textColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="highlightedColor" red="0.738873899" green="0.34305685759999999" blue="0.1645157635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="AtD-Q5-I0U" firstAttribute="leading" secondItem="TYm-p1-QlC" secondAttribute="leading" constant="15" id="1P8-zj-psb"/>
+                                    <constraint firstAttribute="trailing" secondItem="AtD-Q5-I0U" secondAttribute="trailing" constant="15" id="30z-JF-1ns"/>
+                                    <constraint firstAttribute="trailing" secondItem="6bL-Tz-m2Z" secondAttribute="trailing" id="3W8-WJ-8lu"/>
+                                    <constraint firstItem="AtD-Q5-I0U" firstAttribute="centerY" secondItem="TYm-p1-QlC" secondAttribute="centerY" id="C4j-Vm-pST"/>
+                                    <constraint firstAttribute="bottom" secondItem="6bL-Tz-m2Z" secondAttribute="bottom" id="E2W-ef-RRd"/>
+                                    <constraint firstItem="6bL-Tz-m2Z" firstAttribute="leading" secondItem="TYm-p1-QlC" secondAttribute="leading" id="Y7R-0T-6gt"/>
+                                    <constraint firstAttribute="width" secondItem="TYm-p1-QlC" secondAttribute="height" multiplier="138:43" id="bBd-d4-F6g"/>
+                                    <constraint firstItem="6bL-Tz-m2Z" firstAttribute="top" secondItem="TYm-p1-QlC" secondAttribute="top" id="blT-PZ-3Ky"/>
+                                    <constraint firstItem="AtD-Q5-I0U" firstAttribute="centerX" secondItem="TYm-p1-QlC" secondAttribute="centerX" id="rwX-6m-xu5"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slotBG" translatesAutoresizingMaskIntoConstraints="NO" id="fz6-Pm-YWp">
+                                <rect key="frame" x="0.0" y="134" width="414" height="762"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qua-aH-DpX" userLabel="raceInfo">
+                                <rect key="frame" x="0.0" y="134" width="414" height="762"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="KRr-bs-iSg"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="2eG-ZJ-hBs"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WHF-Hh-7Ki"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fz6-Pm-YWp" firstAttribute="trailing" secondItem="WHF-Hh-7Ki" secondAttribute="trailing" id="Aa0-Uc-ngq"/>
+                            <constraint firstItem="fz6-Pm-YWp" firstAttribute="top" secondItem="TYm-p1-QlC" secondAttribute="bottom" constant="5" id="AxZ-8b-aZV"/>
+                            <constraint firstItem="SAc-gI-iN5" firstAttribute="leading" secondItem="TVr-kb-kG3" secondAttribute="leading" id="Bde-en-vYF"/>
+                            <constraint firstItem="qua-aH-DpX" firstAttribute="trailing" secondItem="WHF-Hh-7Ki" secondAttribute="trailing" id="C0Y-ut-7Di"/>
+                            <constraint firstAttribute="bottom" secondItem="fz6-Pm-YWp" secondAttribute="bottom" id="DJu-tj-aSN"/>
+                            <constraint firstItem="SAc-gI-iN5" firstAttribute="trailing" secondItem="WHF-Hh-7Ki" secondAttribute="trailing" id="Fq2-TU-MlZ"/>
+                            <constraint firstItem="TYm-p1-QlC" firstAttribute="top" secondItem="TVr-kb-kG3" secondAttribute="top" id="HwX-Bl-igx"/>
+                            <constraint firstItem="qua-aH-DpX" firstAttribute="leading" secondItem="WHF-Hh-7Ki" secondAttribute="leading" id="R8h-29-rV3"/>
+                            <constraint firstAttribute="bottom" secondItem="SAc-gI-iN5" secondAttribute="bottom" id="SSC-21-Ho0"/>
+                            <constraint firstAttribute="trailing" secondItem="TYm-p1-QlC" secondAttribute="trailing" id="Twr-Kl-4V8"/>
+                            <constraint firstItem="fz6-Pm-YWp" firstAttribute="leading" secondItem="WHF-Hh-7Ki" secondAttribute="leading" id="cys-51-1FA"/>
+                            <constraint firstAttribute="bottom" secondItem="qua-aH-DpX" secondAttribute="bottom" id="o1W-vD-mP1"/>
+                            <constraint firstItem="qua-aH-DpX" firstAttribute="top" secondItem="fz6-Pm-YWp" secondAttribute="top" id="tCD-BX-m7V"/>
+                            <constraint firstItem="TYm-p1-QlC" firstAttribute="leading" secondItem="WHF-Hh-7Ki" secondAttribute="leading" id="vy7-bp-aR2"/>
+                            <constraint firstItem="SAc-gI-iN5" firstAttribute="top" secondItem="TVr-kb-kG3" secondAttribute="top" id="z7V-IM-Qr5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="raceLabel" destination="AtD-Q5-I0U" id="VEw-RJ-vzy"/>
+                        <outlet property="scrollView" destination="qua-aH-DpX" id="VML-nP-ibn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="crx-nn-ZaX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3068" y="801"/>
         </scene>
     </scenes>
     <resources>

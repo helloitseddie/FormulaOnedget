@@ -33,6 +33,7 @@ struct DriverStanding: Codable {
 struct Driver: Codable {
     let givenName: String
     let familyName: String
+    let code: String
 }
 
 struct DriverConstructor: Codable {

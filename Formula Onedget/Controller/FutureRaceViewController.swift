@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RaceViewController: UIViewController {
+class FutureRaceViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var raceLabel: UILabel!
@@ -584,7 +584,7 @@ extension UIView {
         let border = CALayer()
         border.backgroundColor = color
         
-        border.frame = CGRect(x: frame.maxX, y: (frame.minY + (frame.midY / 4)), width: thickness, height: frame.height * 0.75)
+        border.frame = CGRect(x: frame.maxX - (thickness / 2), y: (frame.minY + (frame.midY / 4)), width: thickness, height: frame.height * 0.75)
         
         layer.addSublayer(border)
     }

@@ -32,6 +32,7 @@ class ScheduleViewController: UIViewController {
     let secTimer = UILabel()
     
     var countdown: Timer?
+    var individualRace: IndividualRace?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,11 +210,49 @@ class ScheduleViewController: UIViewController {
         guard let raceInfo = try? JSONDecoder().decode(ScheduleInfo.self, from: chosenRace) else { return }
         guard let raceRaw = formatRace(raceInfo) else { return }
         guard let race = try? JSONDecoder().decode(IndividualRace.self, from: raceRaw) else { return }
+        individualRace = race
         
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "RaceView") as? RaceViewController else { return }
-        let nc = UINavigationController(rootViewController: viewController)
-        viewController.trackInfo = race
-        self.present(nc, animated: true, completion: nil)
+        getResults(round: sender.tag + 1)
+    }
+    
+    func getResults(round: Int) {
+        if let url = URL(string: "https://ergast.com/api/f1/2022/\(round)/results.json") {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url, completionHandler: handleResult(data:response:error:))
+            task.resume()
+            task.suspend()
+        }
+    }
+        
+    func handleResult(data: Data?, response: URLResponse?, error: Error?) {
+        if error != nil {
+            print(error!)
+            return
+        }
+        
+        guard let testData = data else { return }
+        guard let formData = try? JSONDecoder().decode(Results.self, from: testData) else { return }
+        let result = formData.MRData.RaceTable.Races
+        
+        guard let safeRace = individualRace else { return }
+        
+        if result.count == 0 {
+            DispatchQueue.main.async {
+                guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "FutureRaceView") as? FutureRaceViewController else { return }
+                let nc = UINavigationController(rootViewController: viewController)
+                viewController.trackInfo = safeRace
+                self.present(nc, animated: true, completion: nil)
+            }
+        } else {
+            DispatchQueue.main.async {
+                guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PastRaceView") as? PastRaceViewController else { return }
+                let nc = UINavigationController(rootViewController: viewController)
+                viewController.trackInfo = safeRace
+                viewController.results = result[0].Results
+                self.present(nc, animated: true, completion: nil)
+            }
+        }
+
     }
     
     fileprivate func checkDate(_ date: String) -> Bool {

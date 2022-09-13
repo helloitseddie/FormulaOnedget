@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct Schedule: Codable {
     let MRData: SchMRData
 }
